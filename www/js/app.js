@@ -54,7 +54,7 @@ angular.module('starter',
             .state('travel', {
                 url: "/travel",
                 abstract: true,
-                templateUrl: "templates/travel/travels.html",
+                templateUrl: "templates/tabs.html",
                 resolve: {
                     user: function (UserService) {
                         var value = UserService.init();
@@ -67,16 +67,16 @@ angular.module('starter',
                 url: '/list',
                 views: {
                     'travel-list': {
-                        templateUrl: 'templates/travel/travel-list.html',
+                        templateUrl: 'templates/travel/list.html',
                         controller: 'ListCtrl'
                     }
                 }
             })
 
-            .state('travel.detail', {
+            .state('travel.list-detail', {
                 url: '/list/:itemId',
                 views: {
-                    'travel-detail': {
+                    'travel-list': {
                         templateUrl: 'templates/travel/detail.html',
                         controller: 'ListDetailCtrl'
                     }
@@ -87,8 +87,8 @@ angular.module('starter',
                 url: '/account',
                 cache: false,
                 views: {
-                    'tab-account': {
-                        templateUrl: 'templates/tab-account.html',
+                    'account-details': {
+                        templateUrl: 'templates/account/details.html',
                         controller: 'AccountCtrl'
                     }
                 }

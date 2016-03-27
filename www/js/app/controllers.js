@@ -7,16 +7,13 @@ angular.module('app.controllers', [])
     .controller('ListDetailCtrl', [
         '$state', '$scope', '$stateParams', 'UserService',   // <-- controller dependencies
         function ($state, $scope, $stateParams, UserService) {
-
             $scope.index = $stateParams.itemId;
-
         }])
     .controller('ListCtrl', [
         '$state', '$scope', 'UserService',   // <-- controller dependencies
         function ($state, $scope, UserService) {
 
             $scope.dataList = ["One", "Two", "Three"];
-
 
             $scope.doLogoutAction = function () {
                 UserService.logout().then(function () {
