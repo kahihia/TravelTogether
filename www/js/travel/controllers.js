@@ -3,12 +3,13 @@
  * here for the purpose of showing how a service might
  * be used in an application
  */
-angular.module('travel.controllers', [])
+angular.module('app.controllers', [])
   .controller('TravelCreateCtrl', [
-    '$state', '$scope', '$stateParams', 'TravelService', // <-- controller dependencies
+    '$state', '$scope', '$stateParams', 'UserService', // <-- controller dependencies
     function($state, $scope, $stateParams, UserService) {
+      $scope.index = $stateParams.itemId;
       $scope.createTravel = function() {
-        $state.go('travel-create');
+        alert("Create Travel not implemented yet");
       };
     }
   ]);
