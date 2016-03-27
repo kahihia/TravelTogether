@@ -1,0 +1,22 @@
+<ion-view title="Signup">
+    <ion-content padding="true" scroll="false" class="has-header">
+        <form>
+            <ion-list>
+                <label class="item item-input">
+                    <span class="input-label">Starting point</span>
+                    <input type="text" placeholder="Starting point"  ng-model="travel.from">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Destination</span>
+                    <input type="text" placeholder="Destination" ng-model="travel.to">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Available seats</span>
+                    <input type="text" placeholder="Seats" ng-model="travel.seats">
+                </label>
+            </ion-list>
+            <button class="button button-stable button-block"
+                    ng-click="createTravel()">Create</button>
+        </form>
+    </ion-content>
+</ion-view>

@@ -51,10 +51,10 @@ angular.module('starter',
             // setup an abstract state for the tabs directive, check for a user
             // object here is the resolve, if there is no user then redirect the
             // user back to login state on the changeStateError
-            .state('tab', {
-                url: "/tab",
+            .state('travel', {
+                url: "/travel",
                 abstract: true,
-                templateUrl: "templates/tabs.html",
+                templateUrl: "templates/travel/travels.html",
                 resolve: {
                     user: function (UserService) {
                         var value = UserService.init();
@@ -62,28 +62,28 @@ angular.module('starter',
                     }
                 }
             })
-
             // Each tab has its own nav history stack:
-            .state('tab.list', {
+            .state('travel.list', {
                 url: '/list',
                 views: {
-                    'tab-list': {
-                        templateUrl: 'templates/tab-list.html',
+                    'travel-list': {
+                        templateUrl: 'templates/travel/travel-list.html',
                         controller: 'ListCtrl'
                     }
                 }
             })
-            .state('tab.list-detail', {
+
+            .state('travel.detail', {
                 url: '/list/:itemId',
                 views: {
-                    'tab-list': {
-                        templateUrl: 'templates/list-detail.html',
+                    'travel-detail': {
+                        templateUrl: 'templates/travel/detail.html',
                         controller: 'ListDetailCtrl'
                     }
                 }
             })
 
-            .state('tab.account', {
+            .state('travel.account', {
                 url: '/account',
                 cache: false,
                 views: {
@@ -95,7 +95,7 @@ angular.module('starter',
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/list');
+        $urlRouterProvider.otherwise('/travel/list');
 
     })
     .run(function ($ionicPlatform, $rootScope, $state) {
