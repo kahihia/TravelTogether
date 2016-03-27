@@ -23,7 +23,7 @@ angular.module('starter',
     .value('ParseConfiguration', {
         applicationId: "asdadaswetwetghhdghd",
         javascriptKey: "sajdhalsfaldkfoadf",
-        server: "http://localhost:1337/parse"
+        server: "http://78.90.20.186:1337/parse"
     })
 /**
  *
@@ -79,6 +79,16 @@ angular.module('starter',
                     'travel-list': {
                         templateUrl: 'templates/travel/detail.html',
                         controller: 'ListDetailCtrl'
+                    }
+                }
+            })
+
+            .state('travel.create', {
+                url: '/create',
+                views: {
+                    'travel-create': {
+                        templateUrl: 'templates/travel/create.html',
+                        controller: 'TravelCreateCtrl'
                     }
                 }
             })

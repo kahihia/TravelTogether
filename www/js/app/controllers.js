@@ -26,6 +26,11 @@ angular.module('app.controllers', [])
                 })
             };
 
+            $scope.createTravel = function() {
+              console.log("go to createTravel form");
+              $state.go('travel-create');
+            };
+
 
         }])
     .controller('AccountCtrl', [

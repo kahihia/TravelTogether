@@ -17,8 +17,9 @@ angular.module('user.services', [])
         debugger;
         // if initialized, then return the activeUser
         if (parseInitialized === false) {
+          debugger;
           Parse.initialize(ParseConfiguration.applicationId, ParseConfiguration.javascriptKey);
-          Parse.serverURL = 'http://localhost:1337/parse'
+          Parse.serverURL = ParseConfiguration.server;
           parseInitialized = true;
           console.log("parse initialized in init function");
         }
