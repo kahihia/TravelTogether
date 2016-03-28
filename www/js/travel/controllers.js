@@ -3,7 +3,7 @@
  * here for the purpose of showing how a service might
  * be used in an application
  */
-angular.module('app.controllers', [])
+angular.module('travel.controllers', [])
   .controller('TravelCreateCtrl', [
     '$state', '$scope', '$stateParams', 'UserService', // <-- controller dependencies
     function($state, $scope, $stateParams, UserService) {

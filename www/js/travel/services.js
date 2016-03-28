@@ -1,4 +1,4 @@
-angular.module('app.services', [])
+angular.module('travel.services', [])
 
     .service('TravelService', ['$q', 'ParseConfiguration',
         function ($q, ParseConfiguration) {
