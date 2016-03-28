@@ -4,43 +4,19 @@
  * be used in an application
  */
 angular.module('app.controllers', [])
-    .controller('ListDetailCtrl', [
-        '$state', '$scope', '$stateParams', 'UserService',   // <-- controller dependencies
-        function ($state, $scope, $stateParams, UserService) {
-            $scope.index = $stateParams.itemId;
-        }])
-    .controller('ListCtrl', [
-        '$state', '$scope', 'UserService',   // <-- controller dependencies
-        function ($state, $scope, UserService) {
+  .controller('AccountCtrl', [
+    '$state', '$scope', 'UserService', // <-- controller dependencies
+    function($state, $scope, UserService) {
+      UserService.currentUser().then(function(_user) {
+        $scope.user = _user;
+      });
 
-            $scope.dataList = ["One", "Two", "Three"];
-
-            $scope.doLogoutAction = function () {
-                UserService.logout().then(function () {
-
-                    // transition to next state
-                    $state.go('app-login');
-
-                }, function (_error) {
-                    alert("error logging in " + _error.debug);
-                })
-            };
-
-            $scope.createTravel = function() {
-              console.log("go to createTravel form");
-              $state.go('travel-create');
-            };
-
-
-        }])
-    .controller('AccountCtrl', [
-        '$state', '$scope', 'UserService',   // <-- controller dependencies
-        function ($state, $scope, UserService) {
-
-            debugger;
-            UserService.currentUser().then(function (_user) {
-                $scope.user = _user;
-            });
-
-
-        }]);
+      $scope.doLogoutAction = function() {
+        UserService.logout().then(function() {
+          $state.go('app-login');
+        }, function(_error) {
+          alert("error logging in " + _error.debug);
+        })
+      };
+    }
+  ]);

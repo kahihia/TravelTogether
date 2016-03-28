@@ -12,8 +12,8 @@ angular.module('user.controllers', [])
 
             // ng-model holding values from view/html
             $scope.creds = {
-                username: "adminuser",
-                password: "password"
+                username: "tsvetelin.kulinski@gmail.com",
+                password: "123456"
             };
 
             /**

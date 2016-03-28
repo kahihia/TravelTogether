@@ -70,7 +70,7 @@ angular.module('starter',
                 views: {
                     'travel-list': {
                         templateUrl: 'templates/travel/list.html',
-                        controller: 'ListCtrl'
+                        controller: 'TravelListCtrl'
                     }
                 }
             })
@@ -80,7 +80,7 @@ angular.module('starter',
                 views: {
                     'travel-list': {
                         templateUrl: 'templates/travel/detail.html',
-                        controller: 'ListDetailCtrl'
+                        controller: 'TravelListCtrl'
                     }
                 }
             })

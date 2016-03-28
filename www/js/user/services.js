@@ -2,10 +2,7 @@ angular.module('user.services', [])
 
 .service('UserService', ['$q', 'ParseConfiguration',
   function($q, ParseConfiguration) {
-
     var parseInitialized = false;
-
-
     return {
 
       /**
@@ -13,11 +10,7 @@ angular.module('user.services', [])
        * @returns {*}
        */
       init: function() {
-
-        debugger;
-        // if initialized, then return the activeUser
         if (parseInitialized === false) {
-          debugger;
           Parse.initialize(ParseConfiguration.applicationId, ParseConfiguration.javascriptKey);
           Parse.serverURL = ParseConfiguration.server;
           parseInitialized = true;
