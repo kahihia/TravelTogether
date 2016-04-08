@@ -98,8 +98,8 @@ angular.module('starter',
                 url: '/account',
                 cache: false,
                 views: {
-                    'account-details': {
-                        templateUrl: 'templates/account/details.html',
+                    'account': {
+                        templateUrl: 'templates/account/account.html',
                         controller: 'AccountCtrl'
                     }
                 }
