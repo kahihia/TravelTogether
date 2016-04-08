@@ -23,9 +23,8 @@ angular.module('starter',
  * parse constants
  */
     .value('ParseConfiguration', {
-        applicationId: "asdadaswetwetghhdghd",
-        javascriptKey: "sajdhalsfaldkfoadf",
-        server: "http://78.90.20.186:1337/parse"
+        applicationId: "09d2d3292079151c3b2cf86c5c8eda42",
+        server: "https://traveltogether-431.nodechef.com/parse"
     })
 /**
  *
