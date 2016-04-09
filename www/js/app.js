@@ -108,7 +108,7 @@ angular.module('starter', [
       views: {
         'account-view': {
           templateUrl: 'templates/account/details.html',
-          controller: 'AccountCtrl'
+          controller: 'DetailsCtrl'
         }
       }
     })

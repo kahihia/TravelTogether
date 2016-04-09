@@ -5,8 +5,8 @@
  */
 angular.module('app.controllers', ['ngFileUpload'])
   .controller('AccountCtrl', [
-    '$state', '$scope', 'UserService', 'AppService', 'Camera', 'Upload', // <-- controller dependencies
-    function($state, $scope, UserService, AppService, Camera, $upload) {
+    '$state', '$scope', 'UserService', 'AppService', // <-- controller dependencies
+    function($state, $scope, UserService, AppService) {
       UserService.currentUser().then(function(_user) {
         $scope.user = _user;
       });
@@ -17,21 +17,20 @@ angular.module('app.controllers', ['ngFileUpload'])
           alert("error logging in " + _error.debug);
         })
       };
+    }
+  ])
+  .controller('DetailsCtrl', [
+    '$state', '$scope', 'UserService', 'AppService', 'Camera', 'Upload', // <-- controller dependencies
+    function($state, $scope, UserService, AppService, Camera, $upload) {
       $scope.saveProfileDetails = function() {
-        UserService.currentUser()
-          .then(function(_user) {
-            return AppService.saveProfile($scope.profile, $scope.profileParams)
-          })
+        AppService.saveProfile($scope.profile, $scope.profileParams)
           .then(function(profile) {
             console.log("Successfully created profile: " + JSON.stringify(profile))
             alert("Saved!");
           });
       };
       $scope.getProfileDetails = function() {
-        UserService.currentUser()
-          .then(function(_user) {
-            return AppService.getProfile(_user)
-          })
+        AppService.getProfile($scope.user)
           .then(function(profile) {
             $scope.profile = profile;
             $scope.profileParams = {
@@ -41,7 +40,11 @@ angular.module('app.controllers', ['ngFileUpload'])
             }
           });
       };
-      $scope.getProfileDetails();
+      UserService.currentUser()
+        .then(function(_user) {
+          $scope.user = _user;
+        })
+        .then($scope.getProfileDetails);
       $scope.takePicture = function(options) {
         var options = {
           quality: 75,
@@ -56,7 +59,6 @@ angular.module('app.controllers', ['ngFileUpload'])
         }, function(err) {
           console.log(err);
         });
-
       };
       $scope.getPicture = function(options) {
         var options = {
@@ -109,4 +111,4 @@ angular.module('app.controllers', ['ngFileUpload'])
         };
       }
     }
-  ]);
+  ])
