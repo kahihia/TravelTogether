@@ -10,7 +10,9 @@ angular.module('starter', [
     'user.controllers',
     'user.services',
     'travel.controllers',
-    'travel.services'
+    'travel.services',
+    'search.controllers',
+    'search.services'
   ])
   /**
    * see documentation: https://www.parse.com/apps/quickstart#parse_data/web/existing
@@ -105,7 +107,7 @@ angular.module('starter', [
         views: {
           'search-view': {
             templateUrl: 'templates/travel/search.html',
-            controller: 'DetailsCtrl'
+            controller: 'SearchCtrl'
           }
         }
       })

@@ -1,5 +1,16 @@
 <ion-view title="Search">
-  <ion-content class="padding">
-    Searching
-  </ion-content>
+  <ion-content>
+    <div id="search-bar">
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper" id="search-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Search" ng-model="query" ng-change="search(query)">
+        </label>
+      </div>
+    </div>
+    <div class="clearfix">
+      <div ng-repeat="profile in results.profiles">
+        {{ profile.get('email') }}
+      </div>
+    </div>
 </ion-view>
