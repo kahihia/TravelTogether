@@ -3,10 +3,10 @@
  * here for the purpose of showing how a service might
  * be used in an application
  */
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['ngFileUpload'])
   .controller('AccountCtrl', [
-    '$state', '$scope', 'UserService', 'AppService', 'Camera', // <-- controller dependencies
-    function($state, $scope, UserService, AppService, Camera) {
+    '$state', '$scope', 'UserService', 'AppService', 'Camera', 'Upload', // <-- controller dependencies
+    function($state, $scope, UserService, AppService, Camera, $upload) {
       UserService.currentUser().then(function(_user) {
         $scope.user = _user;
       });
@@ -46,10 +46,12 @@ angular.module('app.controllers', [])
           quality: 75,
           targetWidth: 200,
           targetHeight: 200,
-          sourceType: 1
+          sourceType: 1,
+          destinationType: navigator.camera.DestinationType.DATA_URL
         };
         Camera.getPicture(options).then(function(imageData) {
-          $scope.profileParams.avatar = imageData;;
+          $scope.profileParams.avatar = "data:image/jpeg;base64," + imageData;
+          $scope.upload("data:image/jpeg;base64," + imageData);
         }, function(err) {
           console.log(err);
         });
@@ -60,13 +62,50 @@ angular.module('app.controllers', [])
           quality: 75,
           targetWidth: 200,
           targetHeight: 200,
-          sourceType: 0
+          sourceType: 0,
+          destinationType: navigator.camera.DestinationType.DATA_URL
         };
         Camera.getPicture(options).then(function(imageData) {
-          $scope.profileParams.avatar = imageData;;
+          $scope.upload("data:image/jpeg;base64," + imageData);
         }, function(err) {
           console.log(err);
         });
       };
+
+      $scope.upload = function(file) {
+        $scope.title = "avatar";
+        if (file && !file.$error) {
+          console.log(file);
+          file.upload = $upload.upload({
+            url: "https://api.cloudinary.com/v1_1/kulinski/upload",
+            data: {
+              upload_preset: "k6xfmhlu",
+              tags: 'avatars',
+              context: 'photo=' + $scope.title,
+              file: file
+            }
+          }).progress(function(e) {
+            console.log("Progress");
+            file.progress = Math.round((e.loaded * 100.0) / e.total);
+            file.status = "Uploading... " + file.progress + "%";
+          }).success(function(data, status, headers, config) {
+            $scope.debugMsg = data;
+            $scope.profileParams.avatar = data['secure_url'];
+            console.log(JSON.stringify(data));
+            $rootScope.photos = $rootScope.photos || [];
+            data.context = {
+              custom: {
+                photo: $scope.title
+              }
+            };
+            file.result = data;
+            $rootScope.photos.push(data);
+          }).error(function(data, status, headers, config) {
+            $scope.debugMsg = data;
+            console.log(JSON.stringify(data));
+            file.result = data;
+          });
+        };
+      }
     }
   ]);

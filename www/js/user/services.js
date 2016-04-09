@@ -10,6 +10,7 @@ angular.module('user.services', [])
        * @returns {*}
        */
       init: function() {
+        
         if (parseInitialized === false) {
           Parse.initialize(ParseConfiguration.applicationId, ParseConfiguration.javascriptKey);
           Parse.serverURL = ParseConfiguration.server;
