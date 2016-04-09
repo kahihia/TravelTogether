@@ -1,12 +1,12 @@
 <ion-view title="Details">
   <ion-content class="padding">
     <a class="item item-avatar" href="#">
-      <img src="{{profileParams.avatar}}">
+      <img ng-src="{{profileParams.avatar}}">
       <h2>{{user.get('first_name') }} {{user.get('last_name') }}</h2>
       <p>{{user.get('username')}}</p>
     </a>
-    <a ng-click="choosePhoto()" class="item item-icon-left">Choose Photo</a>
-    <a ng-click="takePhoto()" class="item item-icon-left">Take Photo</a>
+    <a ng-click="takePicture()" class="item item-icon-left">Таке Picture</a>
+    <a ng-click="getPicture()" class="item item-icon-left">Open Gallery</a>
     <label class="item item-input item-select">
       <div class="input-label">
         Gender

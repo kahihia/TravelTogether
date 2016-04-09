@@ -4,6 +4,7 @@ angular.module('app.services', [])
       return {
         /**
          * params: profile - profile of current user, params - params from input
+         * if no profile for user, create new one
          */
         saveProfile: function(profile, params) {
           var defered = $q.defer();
@@ -54,4 +55,17 @@ angular.module('app.services', [])
         }
       }
     }
-  ]);
+  ])
+  .factory('Camera', function($q) {
+    return {
+      getPicture: function(options) {
+        var q = $q.defer();
+        navigator.camera.getPicture(function(result) {
+          q.resolve(result);
+        }, function(err) {
+          q.reject(err);
+        }, options);
+        return q.promise;
+      }
+    }
+  });
