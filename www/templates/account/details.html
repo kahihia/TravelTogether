@@ -1,5 +1,25 @@
 <ion-view title="Details">
   <ion-content class="padding">
-    Details
+    <a class="item item-avatar" href="#">
+      <img src="{{profileParams.avatar}}">
+      <h2>{{user.get('first_name') }} {{user.get('last_name') }}</h2>
+      <p>{{user.get('username')}}</p>
+    </a>
+    <a ng-click="choosePhoto()" class="item item-icon-left">Choose Photo</a>
+    <a ng-click="takePhoto()" class="item item-icon-left">Take Photo</a>
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Gender
+      </div>
+      <select ng-model="profileParams.gender">
+        <option>male</option>
+        <option selected>female</option>
+      </select>
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Age</span>
+      <input type="number" ng-model="profileParams.age">
+    </label>
+    <a  ng-click="saveProfileDetails()"  class="button button-positive button-block">Save</a>
   </ion-content>
 </ion-view>
