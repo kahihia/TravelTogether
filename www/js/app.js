@@ -91,37 +91,43 @@ angular.module('starter', [
         }
       }
     })
-
     .state('travel.account', {
-      url: '/account',
-      cache: false,
-      views: {
-        'account-view': {
-          templateUrl: 'templates/account/account.html',
-          controller: 'AccountCtrl'
+        url: '/account',
+        views: {
+          'account-view': {
+            templateUrl: 'templates/account/account.html',
+            controller: 'AccountCtrl'
+          }
         }
-      }
-    })
-    .state('travel.account-details', {
-      url: '/account/details',
-      cache: false,
-      views: {
-        'account-view': {
-          templateUrl: 'templates/account/details.html',
-          controller: 'DetailsCtrl'
+      })
+      .state('travel.search', {
+        url: '/search',
+        views: {
+          'search-view': {
+            templateUrl: 'templates/travel/search.html',
+            controller: 'DetailsCtrl'
+          }
         }
-      }
-    })
-    .state('travel.account-messages', {
-      url: '/account/messages',
-      cache: false,
-      views: {
-        'account-view': {
-          templateUrl: 'templates/account/messages.html',
-          controller: 'AccountCtrl'
+      })
+      .state('travel.account-details', {
+        url: '/account/details',
+        views: {
+          'account-view': {
+            templateUrl: 'templates/account/details.html',
+            controller: 'DetailsCtrl'
+          }
         }
-      }
-    });
+      })
+      .state('travel.account-messages', {
+        url: '/account/messages',
+        cache: false,
+        views: {
+          'account-view': {
+            templateUrl: 'templates/account/messages.html',
+            controller: 'AccountCtrl'
+          }
+        }
+      });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/travel/list');
