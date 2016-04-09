@@ -45,12 +45,14 @@ angular.module('app.controllers', ['ngFileUpload'])
           $scope.user = _user;
         })
         .then($scope.getProfileDetails);
-      $scope.takePicture = function(options) {
+
+      $scope.getPicture = function(sourceType) {
+        //sourceType - 1 - camera, 0 - album
         var options = {
           quality: 75,
           targetWidth: 200,
           targetHeight: 200,
-          sourceType: 1,
+          sourceType: sourceType,
           destinationType: navigator.camera.DestinationType.DATA_URL
         };
         Camera.getPicture(options).then(function(imageData) {
@@ -60,25 +62,10 @@ angular.module('app.controllers', ['ngFileUpload'])
           console.log(err);
         });
       };
-      $scope.getPicture = function(options) {
-        var options = {
-          quality: 75,
-          targetWidth: 200,
-          targetHeight: 200,
-          sourceType: 0,
-          destinationType: navigator.camera.DestinationType.DATA_URL
-        };
-        Camera.getPicture(options).then(function(imageData) {
-          $scope.upload("data:image/jpeg;base64," + imageData);
-        }, function(err) {
-          console.log(err);
-        });
-      };
 
       $scope.upload = function(file) {
         $scope.title = "avatar";
         if (file && !file.$error) {
-          console.log(file);
           file.upload = $upload.upload({
             url: "https://api.cloudinary.com/v1_1/kulinski/upload",
             data: {
@@ -87,26 +74,12 @@ angular.module('app.controllers', ['ngFileUpload'])
               context: 'photo=' + $scope.title,
               file: file
             }
-          }).progress(function(e) {
-            console.log("Progress");
-            file.progress = Math.round((e.loaded * 100.0) / e.total);
-            file.status = "Uploading... " + file.progress + "%";
           }).success(function(data, status, headers, config) {
-            $scope.debugMsg = data;
             $scope.profileParams.avatar = data['secure_url'];
             console.log(JSON.stringify(data));
-            $rootScope.photos = $rootScope.photos || [];
-            data.context = {
-              custom: {
-                photo: $scope.title
-              }
-            };
-            file.result = data;
-            $rootScope.photos.push(data);
           }).error(function(data, status, headers, config) {
-            $scope.debugMsg = data;
             console.log(JSON.stringify(data));
-            file.result = data;
+            alert('Upload failed!');
           });
         };
       }
