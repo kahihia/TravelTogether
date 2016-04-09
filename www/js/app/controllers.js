@@ -24,6 +24,7 @@ angular.module('app.controllers', ['ngFileUpload'])
           })
           .then(function(profile) {
             console.log("Successfully created profile: " + JSON.stringify(profile))
+            alert("Saved!");
           });
       };
       $scope.getProfileDetails = function() {
