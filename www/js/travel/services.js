@@ -39,6 +39,8 @@ function($q, ParseConfiguration) {
       myTravel.set('from', travelParams.from);
       myTravel.set('to', travelParams.to);
       myTravel.set('seats', parseInt(travelParams.seats));
+      myTravel.set('allowsPets',travelParams.allowsPets);
+      myTravel.set('allowsSmoking',travelParams.allowsSmoking);
       myTravel.set('parent', _user);
       myTravel.save(null, {
         success: function(travel) {

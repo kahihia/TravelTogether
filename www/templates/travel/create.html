@@ -14,6 +14,11 @@
                     <span class="input-label">Available seats</span>
                     <input type="text" placeholder="Seats" ng-model="travel.seats">
                 </label>
+                <ion-toggle ng-model="travel.allowsPets" toggle-class="toggle-calm">Allows pets</ion-toggle>
+                <ion-toggle ng-model="travel.allowsSmoking" toggle-class="toggle-calm">Allows smoking</ion-toggle>
+
+
+
             </ion-list>
             <button class="button button-stable button-block"
                     ng-click="createTravel()">Create</button>
