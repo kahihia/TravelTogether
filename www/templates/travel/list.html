@@ -2,7 +2,7 @@
     <ion-content>
         <ion-list can-swipe="true">
             <ion-item class="item" ng-repeat="data in travelList" type="item-text-wrap"
-                      href="#/travel/list/{{$index}}">
+                      href="#/travel/list/{{data.id}}">
                 <pre>{{data.get('from')}}  -->  {{data.get('to')}}</pre>
                 <pre>Available seats: {{data.get('seats')}}</pre>
                 <pre>Price: {{data.get('price')}}</pre>

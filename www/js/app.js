@@ -75,7 +75,7 @@ angular.module('starter', [
       })
 
     .state('travel.list-detail', {
-      url: '/list/:itemId',
+      url: '/list/:travelId',
       views: {
         'travel-list': {
           templateUrl: 'templates/travel/detail.html',

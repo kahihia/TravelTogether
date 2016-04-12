@@ -15,8 +15,9 @@ angular.module('travel.controllers', [])
   .controller('TravelDetailCtrl', [
     '$state', '$scope', '$stateParams', 'UserService', 'TravelService', // <-- controller dependencies
     function($state, $scope, $stateParams, UserService, TravelService) {
-      TravelService.findAllTravels().then(function(travels) {
-        $scope.currentTravel = travels[$stateParams.itemId];
+      TravelService.findCurTravelDetails($stateParams.travelId).then(function(details) {
+        $scope.Details = details;
+        console.log("Results:" + JSON.stringify(details));
       })
     }
   ])
