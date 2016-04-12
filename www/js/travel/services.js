@@ -33,6 +33,7 @@ function($q, ParseConfiguration) {
       return defered.promise;
     },
     createTravel: function(_user, travelParams) {
+      console.log(JSON.stringify(travelParams));
       var defered = $q.defer();
       var Travel = Parse.Object.extend('Travel');
       var myTravel = new Travel();
@@ -41,6 +42,7 @@ function($q, ParseConfiguration) {
       myTravel.set('seats', parseInt(travelParams.seats));
       myTravel.set('allowsPets',travelParams.allowsPets);
       myTravel.set('allowsSmoking',travelParams.allowsSmoking);
+      myTravel.set('price',parseInt(travelParams.price));
       myTravel.set('parent', _user);
       myTravel.save(null, {
         success: function(travel) {

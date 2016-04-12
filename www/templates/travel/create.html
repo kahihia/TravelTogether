@@ -12,10 +12,14 @@
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Available seats</span>
-                    <input type="text" placeholder="Seats" ng-model="travel.seats">
+                    <input type="number" placeholder="Seats" ng-model="travel.seats">
                 </label>
                 <ion-toggle ng-model="travel.allowsPets" toggle-class="toggle-calm">Allows pets</ion-toggle>
                 <ion-toggle ng-model="travel.allowsSmoking" toggle-class="toggle-calm">Allows smoking</ion-toggle>
+                <label class="item item-input">
+                  <span class="input-label">Price</span>
+                  <input type="number" placeholder="Price" ng-model="travel.price">
+                </label>
 
 
 

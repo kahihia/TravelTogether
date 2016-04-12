@@ -19,7 +19,9 @@ angular.module('travel.controllers', [])
       $scope.travel = {
         from: "Nova Zagora",
         to: "Sofia",
-        seats: 4
+        seats: 4,
+        allowsPets: false,
+        allowsSmoking: false
       };
       $scope.createTravel = function() {
         UserService.currentUser()
