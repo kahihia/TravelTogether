@@ -17,9 +17,11 @@ angular.module('travel.controllers', [])
     '$state', '$scope', '$stateParams', 'UserService', 'TravelService', // <-- controller dependencies
     function($state, $scope, $stateParams, UserService, TravelService) {
       $scope.travel = {
-        from: "Lovech",
+        from: "Nova Zagora",
         to: "Sofia",
-        seats: 4
+        seats: 4,
+        allowsPets: false,
+        allowsSmoking: false
       };
       $scope.createTravel = function() {
         UserService.currentUser()
