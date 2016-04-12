@@ -1,12 +1,12 @@
 <ion-view title="Travel Feed">
     <ion-content>
         <ion-list can-swipe="true">
-            <ion-item class="item item-thumbnail-left" ng-repeat="data in travelList" type="item-text-wrap"
+            <ion-item class="item" ng-repeat="data in travelList" type="item-text-wrap"
                       href="#/travel/list/{{$index}}">
-                <pre>{{data.get('from')}}</pre>
-                <ion-option-button class="button-assertive" ng-click="doDeleteRow(data.id)">
-                    DELETE
-                </ion-option-button>
+                <pre>{{data.get('from')}}  -->  {{data.get('to')}}</pre>
+                <pre>Available seats: {{data.get('seats')}}</pre>
+                <pre>Price: {{data.get('price')}}</pre>
+                <pre>Click to view details</pre>
             </ion-item>
         </ion-list>
     </ion-content>
