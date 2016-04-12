@@ -79,7 +79,7 @@ angular.module('starter', [
       views: {
         'travel-list': {
           templateUrl: 'templates/travel/detail.html',
-          controller: 'TravelListCtrl'
+          controller: 'TravelDetailCtrl'
         }
       }
     })

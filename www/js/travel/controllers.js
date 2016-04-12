@@ -8,8 +8,15 @@ angular.module('travel.controllers', [])
     '$state', '$scope', '$stateParams', 'UserService', 'TravelService', // <-- controller dependencies
     function($state, $scope, $stateParams, UserService, TravelService) {
       TravelService.findAllTravels().then(function(travels) {
-        console.log(travels.length);
         $scope.travelList = travels;
+      })
+    }
+  ])
+  .controller('TravelDetailCtrl', [
+    '$state', '$scope', '$stateParams', 'UserService', 'TravelService', // <-- controller dependencies
+    function($state, $scope, $stateParams, UserService, TravelService) {
+      TravelService.findAllTravels().then(function(travels) {
+        $scope.currentTravel = travels[$stateParams.itemId];
       })
     }
   ])
