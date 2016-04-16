@@ -1,7 +1,7 @@
 angular.module('app.services', [])
   .service('AppService', ['$q', 'ParseConfiguration', '$ionicPopup',
     function($q, ParseConfiguration, $ionicPopup) {
-      function alert(title, content){
+      function alert(title, content) {
         $ionicPopup.alert({
           title: title,
           content: content
@@ -20,6 +20,17 @@ angular.module('app.services', [])
          */
         saveProfile: function(profile, params) {
           var defered = $q.defer();
+
+          function createFullName(firstName, lastName) {
+            var name = "";
+            if (firstName) {
+              name = name + firstName + " ";
+            }
+            if (lastName) {
+              name = name + lastName;
+            }
+            return name.toLowerCase();
+          }
           profile.set('age', params.age);
           profile.set('gender', params.gender);
           profile.set('avatar', params.avatar);
@@ -27,6 +38,7 @@ angular.module('app.services', [])
           profile.set('car', params.car);
           profile.set('first_name', params.first_name);
           profile.set('last_name', params.last_name);
+          profile.set('full_name_lowercase', createFullName(params.first_name, params.last_name));
           profile.save(null, {
             success: function(profile) {
               console.log("Profile: Saved " + JSON.stringify(profile));

@@ -5,10 +5,10 @@ angular.module('search.services', [])
     return {
       search: function(text) {
         var defered = $q.defer();
-        var User = Parse.Object.extend('User');
-        var user = new Parse.Query(User);
-        user.contains("first_name", text);
-        user.find({
+        var Profile = Parse.Object.extend('Profile');
+        var query = new Parse.Query(Profile);
+        query.contains("full_name_lowercase", text.toLowerCase());
+        query.find({
           success: function(profiles) {
             console.log(profiles);
             results.profiles = profiles;

@@ -10,7 +10,7 @@
     </div>
     <div class="clearfix">
       <div ng-repeat="profile in results.profiles">
-        {{ profile.get('email') }}
+        {{ profile.get('first_name') }} {{ profile.get('last_name') }}
       </div>
     </div>
 </ion-view>
