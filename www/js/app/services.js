@@ -35,23 +35,26 @@ angular.module('app.services', [])
           var defered = $q.defer();
           var Profile = Parse.Object.extend('Profile');
           var profile = new Parse.Query(Profile);
-          profile.equalTo("parent", _user);
+          profile.equalTo("user_id", _user.id);
           profile.find({
-            success: function(profile) {
-              if (profile.length == 0) {
+            success: function(profiles) {
+              if (profiles.length == 0) {
                 console.log("Profile: Not found. Create New");
-                var p = new Profile();
-                p.set("parent", _user);
-                defered.resolve(p)
+                var newProfile = new Profile();
+                newProfile.set("user_id", _user.id);
+                var newACL = new Parse.ACL();
+                newACL.setWriteAccess(_user.id,  true);
+                newACL.setReadAccess("*",  true);
+                newProfile.setACL(newACL);
+                defered.resolve(newProfile);
               } else {
-                console.log("Profile: Found: " + JSON.stringify(profile[0]));
-                defered.resolve(profile[0])
+                console.log("Profile: Found: " + JSON.stringify(profiles[0]));
+                defered.resolve(profiles[0])
               }
-              defered.resolve(profile);
             },
-            error: function(profile, err) {
+            error: function(profiles, err) {
               console.log("Profile:  Error: " + JSON.stringify(err));
-              defered.reject(profile);
+              defered.reject(profiles);
             }
 
           });

@@ -21,7 +21,7 @@ angular.module('travel.services', [])
         var defered = $q.defer();
         var Travel = Parse.Object.extend('Travel');
         var travel = new Parse.Query(Travel);
-        travel.equalTo("parent", _user);
+        travel.equalTo("user_id", _user.id);
         travel.find({
           success: function(travels) {
             defered.resolve(travels);
@@ -57,7 +57,11 @@ angular.module('travel.services', [])
         myTravel.set('allowsPets', travelParams.allowsPets);
         myTravel.set('allowsSmoking', travelParams.allowsSmoking);
         myTravel.set('price', parseInt(travelParams.price));
-        myTravel.set('parent', _user);
+        myTravel.set('user_id', _user.id);
+        var newACL = new Parse.ACL();
+        newACL.setWriteAccess(_user.id,  true);
+        newACL.setReadAccess("*",  true);
+        myTravel.setACL(newACL);
         myTravel.save(null, {
           success: function(travel) {
             alert("Your travel was created!Travel Id: " + travel.id);
