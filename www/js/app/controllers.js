@@ -19,6 +19,26 @@ angular.module('app.controllers', ['ngFileUpload'])
       };
     }
   ])
+  .controller('ChangePasswordCtrl', [
+    '$state', '$scope', 'UserService', 'AppService', // <-- controller dependencies
+    function($state, $scope, UserService, AppService) {
+      $scope.creds = {};
+      $scope.changePassword = function() {
+        if($scope.creds.newPass !== $scope.creds.repeatPass){
+          alert("Passwords do not match");
+          return;
+        }
+        UserService.currentUser()
+          .then(function(_user) {
+            UserService.changePassword(_user.getUsername(), $scope.creds.currentPass, $scope.creds.newPass).then(function() {
+              alert("Your password is changed!");
+            }, function(_error) {
+              alert(_error);
+            })
+          });
+      };
+    }
+  ])
   .controller('DetailsCtrl', [
     '$state', '$scope', 'UserService', 'AppService', 'Camera', 'Upload', // <-- controller dependencies
     function($state, $scope, UserService, AppService, Camera, $upload) {

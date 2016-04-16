@@ -122,6 +122,15 @@ angular.module('starter', [
           }
         }
       })
+      .state('travel.account-password', {
+        url: '/account/password',
+        views: {
+          'account-view': {
+            templateUrl: 'templates/account/password.html',
+            controller: 'ChangePasswordCtrl'
+          }
+        }
+      })
       .state('travel.account-messages', {
         url: '/account/messages',
         cache: false,

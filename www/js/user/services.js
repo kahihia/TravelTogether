@@ -5,6 +5,17 @@ angular.module('user.services', [])
     var parseInitialized = false;
     return {
 
+      changePassword: function(username, password, newPassword) {
+        var defered = $q.defer();
+        Parse.User.logIn(username, password).then(function(_user) {
+          _user.setPassword(newPassword);
+          _user.save();
+          defered.resolve();
+        },function(err) {
+          defered.reject("Invalid Password");
+        });
+        return defered.promise;
+      },
       /**
        *
        * @returns {*}
