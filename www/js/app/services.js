@@ -1,7 +1,19 @@
 angular.module('app.services', [])
-  .service('AppService', ['$q', 'ParseConfiguration',
-    function($q, ParseConfiguration) {
+  .service('AppService', ['$q', 'ParseConfiguration', '$ionicPopup',
+    function($q, ParseConfiguration, $ionicPopup) {
+      function alert(title, content){
+        $ionicPopup.alert({
+          title: title,
+          content: content
+        });
+      };
       return {
+        alertSuccess: function(content) {
+          alert('Success', content);
+        },
+        alertError: function(content) {
+          alert('Error', content);
+        },
         /**
          * params: profile - profile of current user, params - params from input
          * if no profile for user, create new one
@@ -21,7 +33,6 @@ angular.module('app.services', [])
               defered.resolve(profile);
             },
             error: function(profile, error) {
-              alert('Failed to save profile ' + error.message);
               defered.reject(error);
             }
           });
@@ -43,8 +54,8 @@ angular.module('app.services', [])
                 var newProfile = new Profile();
                 newProfile.set("user_id", _user.id);
                 var newACL = new Parse.ACL();
-                newACL.setWriteAccess(_user.id,  true);
-                newACL.setReadAccess("*",  true);
+                newACL.setWriteAccess(_user.id, true);
+                newACL.setReadAccess("*", true);
                 newProfile.setACL(newACL);
                 defered.resolve(newProfile);
               } else {

@@ -22,8 +22,8 @@ angular.module('travel.controllers', [])
     }
   ])
   .controller('TravelCreateCtrl', [
-    '$state', '$scope', '$stateParams', 'UserService', 'TravelService', // <-- controller dependencies
-    function($state, $scope, $stateParams, UserService, TravelService) {
+    '$state', '$scope', '$stateParams', 'UserService', 'TravelService','AppService',// <-- controller dependencies
+    function($state, $scope, $stateParams, UserService, TravelService, AppService) {
       $scope.travel = {
         from: "Nova Zagora",
         to: "Sofia",
@@ -34,10 +34,11 @@ angular.module('travel.controllers', [])
       $scope.createTravel = function() {
         UserService.currentUser()
           .then(function(_user) {
-            return TravelService.createTravel(_user, $scope.travel)
+            return TravelService.createTravel(_user, $scope.travel);
           })
           .then(function(travel) {
-            console.log("Successfully created travel: " + JSON.stringify(travel))
+            AppService.alertSuccess("Your travel was created!");
+            console.log("Successfully created travel: " + JSON.stringify(travel));
             $state.go('travel.list');
           });
       };

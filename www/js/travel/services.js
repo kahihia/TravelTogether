@@ -64,7 +64,6 @@ angular.module('travel.services', [])
         myTravel.setACL(newACL);
         myTravel.save(null, {
           success: function(travel) {
-            alert("Your travel was created!Travel Id: " + travel.id);
             defered.resolve(travel);
           },
           error: function(travel, error) {
