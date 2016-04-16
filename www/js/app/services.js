@@ -13,6 +13,8 @@ angular.module('app.services', [])
           profile.set('avatar', params.avatar);
           profile.set('city', params.city);
           profile.set('car', params.car);
+          profile.set('first_name', params.first_name);
+          profile.set('last_name', params.last_name);
           profile.save(null, {
             success: function(profile) {
               console.log("Profile: Saved " + JSON.stringify(profile));

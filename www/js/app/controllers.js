@@ -38,7 +38,9 @@ angular.module('app.controllers', ['ngFileUpload'])
               gender: profile.get('gender'),
               avatar: profile.get('avatar'),
               car: profile.get('car'),
-              city: profile.get('city')
+              city: profile.get('city'),
+              first_name: profile.get('first_name'),
+              last_name: profile.get('last_name')
             }
           });
       };

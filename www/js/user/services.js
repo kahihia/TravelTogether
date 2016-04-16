@@ -10,7 +10,7 @@ angular.module('user.services', [])
        * @returns {*}
        */
       init: function() {
-        
+
         if (parseInitialized === false) {
           Parse.initialize(ParseConfiguration.applicationId, ParseConfiguration.javascriptKey);
           Parse.serverURL = ParseConfiguration.server;
@@ -38,8 +38,6 @@ angular.module('user.services', [])
         user.set("username", _userParams.email);
         user.set("password", _userParams.password);
         user.set("email", _userParams.email);
-        user.set("first_name", _userParams.first_name);
-        user.set("last_name", _userParams.last_name);
 
         // should return a promise
         return user.signUp(null, {});
