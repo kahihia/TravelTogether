@@ -5,11 +5,16 @@
  */
 angular.module('travel.controllers', [])
   .controller('TravelListCtrl', [
-    '$state', '$scope', '$stateParams', 'UserService', 'TravelService', // <-- controller dependencies
-    function($state, $scope, $stateParams, UserService, TravelService) {
-      TravelService.findAllTravels().then(function(travels) {
-        $scope.travelList = travels;
-      })
+    '$scope', '$interval', 'TravelService', // <-- controller dependencies
+    function($scope, $interval, TravelService) {
+      function getTravels(){
+        TravelService.findAllTravels().then(function(travels) {
+          console.log('get travels');
+          $scope.travelList = travels;
+        });
+      }
+      getTravels();
+      $interval(getTravels,5000);
     }
   ])
   .controller('TravelDetailCtrl', [
@@ -22,7 +27,7 @@ angular.module('travel.controllers', [])
     }
   ])
   .controller('TravelCreateCtrl', [
-    '$state', '$scope', '$stateParams', 'UserService', 'TravelService','AppService',// <-- controller dependencies
+    '$state', '$scope', '$stateParams', 'UserService', 'TravelService', 'AppService', // <-- controller dependencies
     function($state, $scope, $stateParams, UserService, TravelService, AppService) {
       $scope.travel = {
         from: "Nova Zagora",
