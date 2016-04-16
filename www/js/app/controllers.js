@@ -60,7 +60,6 @@ angular.module('app.controllers', ['ngFileUpload'])
           destinationType: navigator.camera.DestinationType.DATA_URL
         };
         Camera.getPicture(options).then(function(imageData) {
-          $scope.profileParams.avatar = "data:image/jpeg;base64," + imageData;
           $scope.upload("data:image/jpeg;base64," + imageData);
         }, function(err) {
           console.log(err);
