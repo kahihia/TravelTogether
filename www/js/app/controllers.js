@@ -36,7 +36,9 @@ angular.module('app.controllers', ['ngFileUpload'])
             $scope.profileParams = {
               age: profile.get('age'),
               gender: profile.get('gender'),
-              avatar: profile.get('avatar')
+              avatar: profile.get('avatar'),
+              car: profile.get('car'),
+              city: profile.get('city')
             }
           });
       };
@@ -49,9 +51,9 @@ angular.module('app.controllers', ['ngFileUpload'])
       $scope.getPicture = function(sourceType) {
         //sourceType - 1 - camera, 0 - album
         var options = {
-          quality: 75,
-          targetWidth: 200,
-          targetHeight: 200,
+          quality: 100,
+          targetWidth: 300,
+          targetHeight: 300,
           sourceType: sourceType,
           destinationType: navigator.camera.DestinationType.DATA_URL
         };

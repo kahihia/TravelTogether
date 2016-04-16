@@ -1,12 +1,23 @@
 <ion-view title="Details">
   <ion-content class="padding">
-    <a class="item item-avatar" href="#">
+    <a class="item item-thumbnail-left" href="#">
       <img ng-src="{{profileParams.avatar}}">
       <h2>{{user.get('first_name') }} {{user.get('last_name') }}</h2>
       <p>{{user.get('username')}}</p>
     </a>
-    <a ng-click="getPicture(1)" class="item item-icon-left">Таке Picture</a>
-    <a ng-click="getPicture(0)" class="item item-icon-left">Open Gallery</a>
+    <div class="row">
+      <div class="col">
+        <a class="item item-icon-left" ng-click="getPicture(1)">
+          <i class="icon ion-android-camera"></i> Таке Picture
+        </a>
+      </div>
+      <div class="col">
+        <a class="item item-icon-left" ng-click="getPicture(0)">
+          <i class="icon ion-images"></i> Open Gallery
+        </a>
+      </div>
+    </div>
+
     <label class="item item-input item-select">
       <div class="input-label">
         Gender
@@ -16,10 +27,22 @@
         <option selected>female</option>
       </select>
     </label>
+
     <label class="item item-input">
       <span class="input-label">Age</span>
       <input type="number" ng-model="profileParams.age">
     </label>
-    <a  ng-click="saveProfileDetails()"  class="button button-positive button-block">Save</a>
+
+    <label class="item item-input">
+      <span class="input-label">City</span>
+      <input type="text" ng-model="profileParams.city">
+    </label>
+
+    <label class="item item-input">
+      <span class="input-label">Car</span>
+      <input type="text" ng-model="profileParams.car">
+    </label>
+
+    <a ng-click="saveProfileDetails()" class="button button-positive button-block">Save</a>
   </ion-content>
 </ion-view>
