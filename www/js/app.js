@@ -26,7 +26,7 @@ angular.module('starter', [
    //server: "https://traveltogether-431.nodechef.com/parse"
   .value('ParseConfiguration', {
     applicationId: "09d2d3292079151c3b2cf86c5c8eda42",
-    server: "http://78.90.20.186:1337/parse"
+    server: "https://traveltogether-431.nodechef.com/parse"
   })
   /**
    *
