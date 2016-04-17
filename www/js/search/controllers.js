@@ -8,7 +8,11 @@ angular.module('search.controllers', [])
     '$state', '$scope', '$stateParams', 'SearchService', // <-- controller dependencies
     function($state, $scope, $stateParams, SearchService) {
       $scope.search = function(query) {
-        SearchService.search(query).then(function(results) {
+        query = query.trim();
+        if(query === '' || query.length <= 2){
+          return;
+        }
+        SearchService.searchProfiles(query).then(function(results) {
           console.log(JSON.stringify(results));
           $scope.results = results;
         });

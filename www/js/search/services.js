@@ -3,7 +3,7 @@ angular.module('search.services', [])
   function($q) {
     var results = {};
     return {
-      search: function(text) {
+      searchProfiles: function(text) {
         var defered = $q.defer();
         var Profile = Parse.Object.extend('Profile');
         var query = new Parse.Query(Profile);
