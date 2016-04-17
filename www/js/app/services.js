@@ -69,6 +69,9 @@ angular.module('app.services', [])
                 newACL.setWriteAccess(_user.id, true);
                 newACL.setReadAccess("*", true);
                 newProfile.setACL(newACL);
+                newProfile.set("avatar", "http://res.cloudinary.com/kulinski/image/upload/v1460879219/07-512_iv9e3q.png");
+                var email = _user.getEmail();
+                newProfile.set("first_name", email.substring(0, email.indexOf('@')));
                 defered.resolve(newProfile);
               } else {
                 console.log("Profile: Found: " + JSON.stringify(profiles[0]));
