@@ -2,6 +2,13 @@ angular.module('app.services', [])
   .service('MessageService', ['$q',
     function($q) {
       return {
+        getMessages: function(profileId1, profileId2){
+          var defered = $q.defer();
+          var Message = Parse.Object.extend('Message');
+          var messageQuery = new Parse.Query(Message);
+          defered.resolve([{},{}]);
+          return defered.promise;
+        },
         sendMessage: function(fromProfile, toProfile, text) {
           var defered = $q.defer();
           var Message = Parse.Object.extend('Message');

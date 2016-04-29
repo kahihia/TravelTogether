@@ -16,6 +16,9 @@ angular.module('app.controllers', ['ngFileUpload'])
         $scope.user = _user;
         AppService.getProfile(_user).then(function(profile) {
           $scope.fromProfile = profile;
+          MessageService.getMessages($stateParams.profileId, profile.id).then(function(messageList){
+            $scope.messageList = messageList;
+          });
         });
       });
 
