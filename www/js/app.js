@@ -26,7 +26,7 @@ angular.module('starter', [
    //server: "https://traveltogether-431.nodechef.com/parse"
   .value('ParseConfiguration', {
     applicationId: "09d2d3292079151c3b2cf86c5c8eda42",
-    server: "https://traveltogether-431.nodechef.com/parse"
+    server: "http://localhost:1337/parse"
   })
   /**
    *
@@ -105,11 +105,20 @@ angular.module('starter', [
         }
       })
       .state('travel.search', {
-        url: '/search',
+        url: '/search-profile',
         views: {
-          'search-view': {
-            templateUrl: 'templates/travel/search.html',
+          'search-profile-view': {
+            templateUrl: 'templates/search/search-profile.html',
             controller: 'SearchCtrl'
+          }
+        }
+      })
+      .state('travel.send-message', {
+        url: '/send-message/:profileId',
+        views: {
+          'search-profile-view': {
+            templateUrl: 'templates/account/send-message.html',
+            controller: 'SendMessageCtrl'
           }
         }
       })

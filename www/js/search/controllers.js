@@ -9,7 +9,7 @@ angular.module('search.controllers', [])
     function($state, $scope, $stateParams, SearchService) {
       $scope.search = function(query) {
         query = query.trim();
-        if(query === '' || query.length <= 2){
+        if (query === '' || query.length < 2) {
           return;
         }
         SearchService.searchProfiles(query).then(function(results) {

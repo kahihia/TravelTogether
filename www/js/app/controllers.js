@@ -4,6 +4,15 @@
  * be used in an application
  */
 angular.module('app.controllers', ['ngFileUpload'])
+  .controller('SendMessageCtrl', [
+    '$state', '$scope', '$stateParams', 'AppService', // <-- controller dependencies
+    function($state, $scope, $stateParams, AppService) {
+      AppService.getProfileById($stateParams.profileId).then(function(profile) {
+        $scope.profile = profile;
+        console.log("Profile: " + JSON.stringify(profile));
+      })
+    }
+  ])
   .controller('AccountCtrl', [
     '$state', '$scope', 'UserService', 'AppService', // <-- controller dependencies
     function($state, $scope, UserService, AppService) {
@@ -24,7 +33,7 @@ angular.module('app.controllers', ['ngFileUpload'])
     function($state, $scope, UserService, AppService) {
       $scope.creds = {};
       $scope.changePassword = function() {
-        if($scope.creds.newPass !== $scope.creds.repeatPass){
+        if ($scope.creds.newPass !== $scope.creds.repeatPass) {
           AppService.alertError("Passwords do not match!");
           return;
         }
@@ -46,7 +55,7 @@ angular.module('app.controllers', ['ngFileUpload'])
         AppService.saveProfile($scope.profile, $scope.profileParams)
           .then(function(profile) {
             AppService.alertSuccess("Profile is saved");
-          },function(error) {
+          }, function(error) {
             alert('Failed to save profile ' + error.message);
             AppService.alertError("Oops, your profile was not save successfully");
           });

@@ -14,6 +14,20 @@ angular.module('app.services', [])
         alertError: function(content) {
           alert('Error', content);
         },
+        getProfileById: function(profileId) {
+          var defered = $q.defer();
+          var Profile = Parse.Object.extend('Profile');
+          var profileQuery = new Parse.Query(Profile);
+          profileQuery.get(profileId, {
+            success: function(profile) {
+              defered.resolve(profile);
+            },
+            error: function(err) {
+              defered.reject(err);
+            }
+          });
+          return defered.promise;
+        },
         /**
          * params: profile - profile of current user, params - params from input
          * if no profile for user, create new one
