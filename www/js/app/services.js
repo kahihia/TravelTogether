@@ -1,4 +1,28 @@
 angular.module('app.services', [])
+  .service('MessageService', ['$q',
+    function($q) {
+      return {
+        sendMessage: function(fromProfile, toProfile, text) {
+          var defered = $q.defer();
+          var Message = Parse.Object.extend('Message');
+          var m = new Message();
+          m.set('recipient_profile_id', fromProfile);
+          m.set('sender_profile_id', toProfile);
+          m.set('text', text);
+          m.save(null, {
+            success: function(message) {
+              console.log("Message saved " + JSON.stringify(message));
+              defered.resolve(message);
+            },
+            error: function(message, error) {
+              defered.reject(error);
+            }
+          });
+          return defered.promise;
+        }
+      }
+    }
+  ])
   .service('AppService', ['$q', 'ParseConfiguration', '$ionicPopup',
     function($q, ParseConfiguration, $ionicPopup) {
       function alert(title, content) {

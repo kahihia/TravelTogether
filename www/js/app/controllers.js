@@ -5,12 +5,24 @@
  */
 angular.module('app.controllers', ['ngFileUpload'])
   .controller('SendMessageCtrl', [
-    '$state', '$scope', '$stateParams', 'AppService', // <-- controller dependencies
-    function($state, $scope, $stateParams, AppService) {
+    '$state', '$scope', '$stateParams', 'AppService', 'MessageService', 'UserService', // <-- controller dependencies
+    function($state, $scope, $stateParams, AppService, MessageService, UserService) {
+      $scope.data = {};
       AppService.getProfileById($stateParams.profileId).then(function(profile) {
-        $scope.profile = profile;
-        console.log("Profile: " + JSON.stringify(profile));
-      })
+        console.log(profile);
+        $scope.toProfile = profile;
+      });
+      UserService.currentUser().then(function(_user) {
+        $scope.user = _user;
+        AppService.getProfile(_user).then(function(profile) {
+          $scope.fromProfile = profile;
+        });
+      });
+
+      $scope.sendMessage = function() {
+        console.log($scope.data.text);
+        MessageService.sendMessage($scope.fromProfile.id, $scope.toProfile.id, $scope.data.text);
+      }
     }
   ])
   .controller('AccountCtrl', [

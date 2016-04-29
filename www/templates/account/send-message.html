@@ -1,5 +1,24 @@
 <ion-view title="Messages">
   <ion-content class="padding">
-    {{profile.id}}
+    <div>
+      <h3 class="title">{{toProfile.get('first_name')}} {{toProfile.get('last_name')}}</h3>
+      <ion-list can-swipe="true">
+          <ion-item class="item" ng-repeat="data in travelList" type="item-text-wrap">
+              <pre>Click to view details</pre>
+          </ion-item>
+      </ion-list>
+    </div>
+    <div class="bar bar-footer">
+      <form>
+        <div class="item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="Message" ng-model="data.text">
+          </label>
+          <button ng-click="sendMessage()" class="button button-small">
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
   </ion-content>
 </ion-view>
