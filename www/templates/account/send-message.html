@@ -3,9 +3,14 @@
     <div>
       <h3 class="title">{{toProfile.get('first_name')}} {{toProfile.get('last_name')}}</h3>
       <ion-list can-swipe="true">
-          <ion-item class="item" ng-repeat="data in messageList" type="item-text-wrap">
-              <pre>Click to view details</pre>
-          </ion-item>
+        <ion-item class="item" ng-repeat="data in messageList" type="item-text-wrap">
+          <div ng-if="fromProfile.id==data.get('sender_profile_id')">
+            <pre>Sent: {{data.get('text')}}</pre>
+          </div>
+          <div ng-if="toProfile.id==data.get('sender_profile_id')">
+            <pre>Received: {{data.get('text')}}</pre>
+          </div>
+        </ion-item>
       </ion-list>
     </div>
     <div class="bar bar-footer">
