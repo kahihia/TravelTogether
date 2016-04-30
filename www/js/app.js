@@ -146,7 +146,7 @@ angular.module('starter', [
         views: {
           'account-view': {
             templateUrl: 'templates/account/messages.html',
-            controller: 'AccountCtrl'
+            controller: 'SearchCtrl'
           }
         }
       });
