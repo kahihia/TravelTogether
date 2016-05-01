@@ -11,19 +11,19 @@
             <pre class="balanced" align="left">{{data.get('text')}}</pre>
           </div>
         </ion-item>
+        <ion-item>
+        <form>
+          <div class="item-input-inset">
+            <label class="item-input-wrapper">
+              <input type="text" placeholder="Message" ng-model="data.text">
+            </label>
+            <button ng-click="sendMessage()" class="button button-small">
+              Send
+            </button>
+          </div>
+        </form>
+      </ion-item>
       </ion-list>
     </div>
   </ion-content>
-  <ion-footer-bar class="bar-footer">
-    <form>
-      <div class="item-input-inset">
-        <label class="item-input-wrapper">
-          <input type="text" placeholder="Message" ng-model="data.text">
-        </label>
-        <button ng-click="sendMessage()" class="button button-small">
-          Send
-        </button>
-      </div>
-    </form>
-  </ion-footer-bar>
 </ion-view>

@@ -17,24 +17,26 @@ angular.module('messages.controllers', [])
     }
   ])
   .controller('SendMessageCtrl', [
-    '$state', '$scope', '$stateParams', '$interval', 'AppService', 'MessagesService', 'UserService',
-    function($state, $scope, $stateParams, $interval, AppService, MessagesService, UserService) {
+    '$state', '$scope', '$stateParams', '$interval', 'AppService', 'MessagesService', 'UserService', '$ionicScrollDelegate',
+    function($state, $scope, $stateParams, $interval, AppService, MessagesService, UserService, $ionicScrollDelegate) {
       $scope.data = {};
       AppService.getProfileById($stateParams.profileId).then(function(profile) {
         $scope.toProfile = profile;
       });
       var getMessages;
-      UserService.currentUser().then(function(_user) {
-        $scope.user = _user;
-        AppService.getProfile(_user).then(function(profile) {
-          $scope.fromProfile = profile;
-          getMessages = $interval(function() {
-            MessagesService.getMessages($stateParams.profileId).then(function(messageList) {
-              $scope.messageList = messageList;
-              console.log("get messages");
-            });
-          }, 1000);
-
+      $scope.$on("$ionicView.enter", function(event, data) {
+        UserService.currentUser().then(function(_user) {
+          $scope.user = _user;
+          AppService.getProfile(_user).then(function(profile) {
+            $scope.fromProfile = profile;
+            getMessages = $interval(function() {
+              MessagesService.getMessages($stateParams.profileId).then(function(messageList) {
+                $scope.messageList = messageList;
+                console.log("get messages");
+                $ionicScrollDelegate.scrollBottom();
+              });
+            }, 2000);
+          });
         });
       });
       $scope.$on("$ionicView.afterLeave", function(event, data) {
