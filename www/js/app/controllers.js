@@ -7,6 +7,7 @@ angular.module('app.controllers', ['ngFileUpload'])
   .controller('SendMessageCtrl', [
     '$state', '$scope', '$stateParams', '$interval', 'AppService', 'MessageService', 'UserService', // <-- controller dependencies
     function($state, $scope, $stateParams, $interval, AppService, MessageService, UserService) {
+      console.log("SendMessageCtrl");
       $scope.data = {};
       AppService.getProfileById($stateParams.profileId).then(function(profile) {
         console.log(profile);
@@ -23,7 +24,7 @@ angular.module('app.controllers', ['ngFileUpload'])
             });
           }, 1000);
 
-          $interval.cancel(getMessages);
+          //$interval.cancel(getMessages);
         });
       });
 

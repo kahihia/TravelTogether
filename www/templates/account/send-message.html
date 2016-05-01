@@ -7,8 +7,7 @@
           <div ng-if="fromProfile.id==data.get('sender_profile_id')">
             <pre class="positive" align="right">{{data.get('text')}}</pre>
           </div>
-          <div ng-if="toProfile.id==data.get('sender_profile_id')" class="item item-avatar-left">
-            <img src="{{fromProfile.get('avatar')}}">
+          <div ng-if="toProfile.id==data.get('sender_profile_id')" >
             <pre class="balanced" align="left">{{data.get('text')}}</pre>
           </div>
         </ion-item>

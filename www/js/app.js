@@ -116,7 +116,7 @@ angular.module('starter', [
       .state('travel.send-message', {
         url: '/send-message/:profileId',
         views: {
-          'search-profile-view': {
+          'account-view': {
             templateUrl: 'templates/account/send-message.html',
             controller: 'SendMessageCtrl'
           }
