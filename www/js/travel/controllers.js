@@ -9,7 +9,10 @@ angular.module('travel.controllers', [])
         });
       }
       getTravels();
-      $interval(getTravels,5000);
+      var interval = $interval(getTravels,5000);
+      $scope.$on("$ionicView.afterLeave", function(event, data) {
+        $interval.cancel(interval);
+      });
     }
   ])
   .controller('TravelDetailCtrl', [

@@ -33,11 +33,14 @@ angular.module('messages.controllers', [])
           getMessages = $interval(function() {
             MessagesService.getMessages($stateParams.profileId).then(function(messageList) {
               $scope.messageList = messageList;
-              console.log(messageList);
+              console.log("get messages");
             });
           }, 1000);
-          //$interval.cancel(getMessages);
+
         });
+      });
+      $scope.$on("$ionicView.afterLeave", function(event, data) {
+        $interval.cancel(getMessages);
       });
       $scope.sendMessage = function() {
         MessagesService.sendMessage($scope.toProfile.id, $scope.data.text);
