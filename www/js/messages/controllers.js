@@ -6,9 +6,7 @@ angular.module('messages.controllers', [])
         query = query.trim();
         if (query === '' || query.length < 2) {
           MessagesService.getLastConversations().then(function(results) {
-            console.log("myProfile");
             $scope.results = results;
-            console.log(results);
           });
         } else {
           SearchService.searchProfiles(query).then(function(results) {
