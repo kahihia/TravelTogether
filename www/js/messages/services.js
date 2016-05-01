@@ -9,10 +9,12 @@ angular.module('messages.services', [])
         });
       });
       return {
-        getLastConversations(){
+        getLastConversations() {
           var defered = $q.defer();
           var query = new Parse.Query(Message);
-          defered.resolve({profiles:[myProfile]});
+          defered.resolve({
+            profiles: [myProfile]
+          });
           return defered.promise;
         },
         getMessages: function(otherProfileId) {
@@ -40,9 +42,10 @@ angular.module('messages.services', [])
           m.set('recipient_profile_id', toProfile);
           m.set('sender_profile_id', myProfile.id);
           m.set('text', text);
+          m.set('acknowledged', false);
           m.save(null, {
             success: function(message) {
-              console.log("Message saved " + JSON.stringify(message));
+              console.log("Message sent " + JSON.stringify(message));
               defered.resolve(message);
             },
             error: function(message, error) {
