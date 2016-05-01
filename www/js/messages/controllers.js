@@ -33,13 +33,14 @@ angular.module('messages.controllers', [])
           getMessages = $interval(function() {
             MessagesService.getMessages($stateParams.profileId).then(function(messageList) {
               $scope.messageList = messageList;
+              console.log(messageList);
             });
           }, 1000);
           //$interval.cancel(getMessages);
         });
       });
       $scope.sendMessage = function() {
-        MessagesService.sendMessage($scope.fromProfile.id, $scope.toProfile.id, $scope.data.text);
+        MessagesService.sendMessage($scope.toProfile.id, $scope.data.text);
       }
     }
   ]);

@@ -7,6 +7,17 @@ angular.module('app.services', [])
           content: content
         });
       };
+      function createFullName(firstName, lastName) {
+        var name = "";
+        if (firstName) {
+          name = name + firstName + " ";
+        }
+        if (lastName) {
+          name = name + lastName;
+        }
+        return name.toLowerCase();
+      }
+      var Profile = Parse.Object.extend('Profile');
       return {
         alertSuccess: function(content) {
           alert('Success', content);
@@ -16,7 +27,6 @@ angular.module('app.services', [])
         },
         getProfileById: function(profileId) {
           var defered = $q.defer();
-          var Profile = Parse.Object.extend('Profile');
           var profileQuery = new Parse.Query(Profile);
           profileQuery.get(profileId, {
             success: function(profile) {
@@ -35,16 +45,6 @@ angular.module('app.services', [])
         saveProfile: function(profile, params) {
           var defered = $q.defer();
 
-          function createFullName(firstName, lastName) {
-            var name = "";
-            if (firstName) {
-              name = name + firstName + " ";
-            }
-            if (lastName) {
-              name = name + lastName;
-            }
-            return name.toLowerCase();
-          }
           profile.set('age', params.age);
           profile.set('gender', params.gender);
           profile.set('avatar', params.avatar);
@@ -70,7 +70,7 @@ angular.module('app.services', [])
          */
         getProfile: function(_user) {
           var defered = $q.defer();
-          var Profile = Parse.Object.extend('Profile');
+
           var profile = new Parse.Query(Profile);
           profile.equalTo("user_id", _user.id);
           profile.find({

@@ -1,11 +1,11 @@
 angular.module('search.services', [])
 .service('SearchService', ['$q',
   function($q) {
+    var Profile = Parse.Object.extend('Profile');
     var results = {};
     return {
       searchProfiles: function(text) {
         var defered = $q.defer();
-        var Profile = Parse.Object.extend('Profile');
         var query = new Parse.Query(Profile);
         query.contains("full_name_lowercase", text.toLowerCase());
         query.find({

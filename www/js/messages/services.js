@@ -18,6 +18,8 @@ angular.module('messages.services', [])
           return defered.promise;
         },
         getMessages: function(otherProfileId) {
+          console.log(otherProfileId);
+          console.log(myProfile.id);
           var defered = $q.defer();
           var query1 = new Parse.Query(Message);
           query1.equalTo("sender_profile_id", myProfile.id);
