@@ -1,23 +1,31 @@
 angular.module('messages.services', [])
-  .service('MessagesService', ['$q',
-    function($q) {
+  .service('MessagesService', ['$q', 'UserService', 'AppService',
+    function($q, UserService, AppService) {
+      var Message = Parse.Object.extend('Message');
+      var myProfile;
+      UserService.currentUser().then(function(_user) {
+        AppService.getProfile(_user).then(function(profile) {
+          myProfile = profile;
+        });
+      });
       return {
-        getMessages: function(profileId1, profileId2) {
+        getLastConversations(){
           var defered = $q.defer();
-          var Message = Parse.Object.extend('Message');
+          var query = new Parse.Query(Message);
+          defered.resolve({profiles:[myProfile]});
+          return defered.promise;
+        },
+        getMessages: function(otherProfileId) {
+          var defered = $q.defer();
           var query1 = new Parse.Query(Message);
-          console.log(profileId1);
-          console.log(profileId2);
-          query1.equalTo("sender_profile_id", profileId1);
-          query1.equalTo("recipient_profile_id", profileId2);
+          query1.equalTo("sender_profile_id", myProfile.id);
+          query1.equalTo("recipient_profile_id", otherProfileId);
           var query2 = new Parse.Query(Message);
-          query2.equalTo("sender_profile_id", profileId2);
-          query2.equalTo("recipient_profile_id", profileId1);
-
+          query2.equalTo("sender_profile_id", otherProfileId);
+          query2.equalTo("recipient_profile_id", myProfile.id);
           var messageQuery = Parse.Query.or(query1, query2);
           messageQuery.find({
             success: function(messages) {
-              console.log(messages);
               defered.resolve(messages);
             },
             error: function(err) {
@@ -26,12 +34,11 @@ angular.module('messages.services', [])
           });
           return defered.promise;
         },
-        sendMessage: function(fromProfile, toProfile, text) {
+        sendMessage: function(toProfile, text) {
           var defered = $q.defer();
-          var Message = Parse.Object.extend('Message');
           var m = new Message();
           m.set('recipient_profile_id', toProfile);
-          m.set('sender_profile_id', fromProfile);
+          m.set('sender_profile_id', myProfile.id);
           m.set('text', text);
           m.save(null, {
             success: function(message) {
