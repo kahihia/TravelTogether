@@ -4,38 +4,6 @@
  * be used in an application
  */
 angular.module('app.controllers', ['ngFileUpload'])
-  .controller('SendMessageCtrl', [
-    '$state', '$scope', '$stateParams', '$interval', 'AppService', 'MessageService', 'UserService', // <-- controller dependencies
-    function($state, $scope, $stateParams, $interval, AppService, MessageService, UserService) {
-      console.log("SendMessageCtrl");
-      $scope.data = {};
-      AppService.getProfileById($stateParams.profileId).then(function(profile) {
-        console.log(profile);
-        $scope.toProfile = profile;
-      });
-      var getMessages;
-      UserService.currentUser().then(function(_user) {
-        $scope.user = _user;
-        AppService.getProfile(_user).then(function(profile) {
-          $scope.fromProfile = profile;
-          getMessages = $interval(function() {
-            MessageService.getMessages($stateParams.profileId, profile.id).then(function(messageList) {
-              $scope.messageList = messageList;
-            });
-          }, 1000);
-
-          //$interval.cancel(getMessages);
-        });
-      });
-
-
-
-      $scope.sendMessage = function() {
-        console.log($scope.data.text);
-        MessageService.sendMessage($scope.fromProfile.id, $scope.toProfile.id, $scope.data.text);
-      }
-    }
-  ])
   .controller('AccountCtrl', [
     '$state', '$scope', 'UserService', 'AppService', // <-- controller dependencies
     function($state, $scope, UserService, AppService) {

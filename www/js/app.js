@@ -11,6 +11,8 @@ angular.module('starter', [
     'user.services',
     'travel.controllers',
     'travel.services',
+    'messages.controllers',
+    'messages.services',
     'search.controllers',
     'search.services'
   ])
@@ -146,7 +148,7 @@ angular.module('starter', [
         views: {
           'account-view': {
             templateUrl: 'templates/account/messages.html',
-            controller: 'SearchCtrl'
+            controller: 'MessagesCtrl'
           }
         }
       });
