@@ -25,10 +25,10 @@ angular.module('starter', [
    * parse constants
    */
    //server: "http://78.90.20.186:1337/parse"
-   //server: "https://traveltogether-431.nodechef.com/parse"
+   //server: "https://together-674.nodechef.com/parse"
   .value('ParseConfiguration', {
-    applicationId: "09d2d3292079151c3b2cf86c5c8eda42",
-    server: "http://localhost:1337/parse"
+    applicationId: "78fb3fb548a67e933d8995ea282262e6",
+    server: "https://together-674.nodechef.com/parse"
   })
   /**
    *
