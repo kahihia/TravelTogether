@@ -25,9 +25,6 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.traveltogether846529"
         },
-        "cordova-plugin-datepicker": {
-            "PACKAGE_NAME": "com.ionicframework.traveltogether846529"
-        },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.traveltogether846529"
         }

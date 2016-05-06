@@ -9,7 +9,7 @@ angular.module('messages.services', [])
         });
       });
       return {
-        getLastConversations() {
+        getLastConversations: function(){
           var defered = $q.defer();
           var query = new Parse.Query(Message);
           defered.resolve({
