@@ -22,6 +22,7 @@ angular.module('travel.services', [])
         findCurTravelDetails: function(_travelID) {
           var defered = $q.defer();
           var travel = new Parse.Query(Travel);
+          travel.include("profile");
           travel.get(_travelID, {
             success: function(travel) {
               defered.resolve(travel);
@@ -59,7 +60,7 @@ angular.module('travel.services', [])
           });
           return defered.promise;
         },
-        createTravel: function(_user, travelParams) {
+        createTravel: function(profile, travelParams) {
           var defered = $q.defer();
           var myTravel = new Travel();
           myTravel.set('from', travelParams.from);
@@ -68,9 +69,9 @@ angular.module('travel.services', [])
           myTravel.set('allowsPets', travelParams.allowsPets);
           myTravel.set('allowsSmoking', travelParams.allowsSmoking);
           myTravel.set('price', parseInt(travelParams.price));
-          myTravel.set('user_id', _user.id);
+          myTravel.set('profile', profile);
           var newACL = new Parse.ACL();
-          newACL.setWriteAccess(_user.id, true);
+          newACL.setWriteAccess(profile.get('user_id'), true);
           newACL.setReadAccess("*", true);
           myTravel.setACL(newACL);
           myTravel.save(null, {

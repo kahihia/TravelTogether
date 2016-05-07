@@ -31,6 +31,7 @@ angular.module('travel.controllers', [])
     function($state, $scope, $stateParams, AppService, TravelService) {
       TravelService.findCurTravelDetails($stateParams.travelId).then(function(details) {
         $scope.details = details;
+        $scope.profile = details.get('profile');
         console.log("Results:" + JSON.stringify(details));
       })
     }
@@ -51,7 +52,18 @@ angular.module('travel.controllers', [])
         }
         UserService.currentUser()
           .then(function(_user) {
-            return TravelService.createTravel(_user, $scope.travel);
+            AppService.getOrCreateProfile(_user.id, _user.get('Email'))
+              .then(function(profile) {
+                $scope.fromProfile = profile;
+              });
+          });
+
+        UserService.currentUser()
+          .then(function(_user) {
+            return AppService.getOrCreateProfile(_user.id, _user.get('Email'))
+          })
+          .then(function(profile) {
+            return TravelService.createTravel(profile, $scope.travel);
           })
           .then(function(travel) {
             AppService.alertSuccess("Your travel was created!");

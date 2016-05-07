@@ -3,13 +3,14 @@
     <div class="list card">
 
       <div class="item item-avatar">
-        <img src="icon.png">
-        <p>{{details.get('price')}}</p>
-        <pre>{{details.get('from')}}  -->  {{details.get('to')}}</pre>
-        <pre>Свободни места: {{details.get('seats')}}</pre>
-        <pre>Цена: {{details.get('price')}}</pre>
+        <img src={{profile.get('avatar')}}>
+        <h2>{{ profile.get('first_name') }} {{ profile.get('last_name') }}</h2>
+        <p>Car: {{ profile.get('car') }}</p>
+        <p>Age: {{ profile.get('age') }}</p>
       </div>
-
+      <pre>{{details.get('from')}}  -->  {{details.get('to')}}</pre>
+      <pre>Свободни места: {{details.get('seats')}}</pre>
+      <pre>Цена: {{details.get('price')}}</pre>
 
     </div>
   </ion-content>
