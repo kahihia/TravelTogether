@@ -1,27 +1,16 @@
 <ion-view title="ITEM DETAIL">
-  <ion-nav-buttons side="right">
-      <button class="button icon ion-navicon" ng-click="doItemSettingsAction()">
-      </button>
-    </ion-nav-buttons>
-    <ion-content has-header="true" padding="true">
-      <div class="list card">
+  <ion-content has-header="true" padding="true">
+    <div class="list card">
 
-  <div class="item item-avatar">
-    <img src="icon.png">
-    <h2>Marty McFly</h2>
-    <p>{{Details.get('price')}}</p>
-  </div>
+      <div class="item item-avatar">
+        <img src="icon.png">
+        <p>{{details.get('price')}}</p>
+        <pre>{{details.get('from')}}  -->  {{details.get('to')}}</pre>
+        <pre>Свободни места: {{details.get('seats')}}</pre>
+        <pre>Цена: {{details.get('price')}}</pre>
+      </div>
 
-  <div class="item item-body">
-    <p>
 
-    </p>
-    <p>
-      <a href="#" class="subdued">SHOW ME THE MOVES</a>
-      <a href="#" class="subdued">Keep It Simple & Stupid </a>
-    </p>
-  </div>
-
-</div>
-    </ion-content>
+    </div>
+  </ion-content>
 </ion-view>

@@ -27,10 +27,10 @@ angular.module('travel.controllers', [])
     }
   ])
   .controller('TravelDetailCtrl', [
-    '$state', '$scope', '$stateParams', 'UserService', 'TravelService', // <-- controller dependencies
-    function($state, $scope, $stateParams, UserService, TravelService) {
+    '$state', '$scope', '$stateParams', 'AppService', 'TravelService', // <-- controller dependencies
+    function($state, $scope, $stateParams, AppService, TravelService) {
       TravelService.findCurTravelDetails($stateParams.travelId).then(function(details) {
-        $scope.Details = details;
+        $scope.details = details;
         console.log("Results:" + JSON.stringify(details));
       })
     }
