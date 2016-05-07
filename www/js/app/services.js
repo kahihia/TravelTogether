@@ -64,29 +64,31 @@ angular.module('app.services', [])
           });
           return defered.promise;
         },
-        /**
-         * params: _user - parent of profile
-         * if no profile for user, create new one
-         */
-        getProfile: function(_user) {
+        getOrCreateProfile: function(_userId, _userEmail) {
           var defered = $q.defer();
-
           var profile = new Parse.Query(Profile);
-          profile.equalTo("user_id", _user.id);
+          profile.equalTo("user_id", _userId);
           profile.find({
             success: function(profiles) {
               if (profiles.length == 0) {
                 console.log("Profile: Not found. Create New");
                 var newProfile = new Profile();
-                newProfile.set("user_id", _user.id);
+                newProfile.set("user_id", _userId);
                 var newACL = new Parse.ACL();
-                newACL.setWriteAccess(_user.id, true);
+                newACL.setWriteAccess(_userId, true);
                 newACL.setReadAccess("*", true);
                 newProfile.setACL(newACL);
                 newProfile.set("avatar", "http://res.cloudinary.com/kulinski/image/upload/v1460879219/07-512_iv9e3q.png");
-                var email = _user.getEmail();
-                newProfile.set("first_name", email.substring(0, email.indexOf('@')));
-                defered.resolve(newProfile);
+                newProfile.set("first_name", _userEmail.substring(0, _userEmail.indexOf('@')));
+                newProfile.save(null, {
+                  success: function(profile) {
+                    console.log("Profile: Saved " + JSON.stringify(profile));
+                    defered.resolve(profile);
+                  },
+                  error: function(profile, error) {
+                    defered.reject(error);
+                  }
+                });
               } else {
                 console.log("Profile: Found: " + JSON.stringify(profiles[0]));
                 defered.resolve(profiles[0])

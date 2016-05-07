@@ -1,6 +1,6 @@
 angular.module('user.services', [])
-  .service('UserService', ['$q', 'ParseConfiguration',
-    function($q, ParseConfiguration) {
+  .service('UserService', ['$q', 'ParseConfiguration', 'AppService',
+    function($q, ParseConfiguration, AppService) {
       var parseInitialized = false;
       return {
         changePassword: function(username, password, newPassword) {
@@ -34,7 +34,12 @@ angular.module('user.services', [])
           user.set("username", _userParams.email);
           user.set("password", _userParams.password);
           user.set("email", _userParams.email);
-          return user.signUp(null, {});
+          var result = user.signUp(null, {
+            success: function(user) {
+              AppService.getOrCreateProfile(user.id, user.get('Email'));
+            }
+          });
+          return result;
         },
         currentUser: function(_parseInitUser) {
           // if there is no user passed in, see if there is already an

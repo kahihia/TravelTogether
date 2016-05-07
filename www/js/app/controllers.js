@@ -47,7 +47,7 @@ angular.module('app.controllers', ['ngFileUpload'])
           });
       };
       $scope.getProfileDetails = function() {
-        AppService.getProfile($scope.user)
+        AppService.getOrCreateProfile($scope.user.id, $scope.user.get('Email'))
           .then(function(profile) {
             $scope.profile = profile;
             $scope.profileParams = {

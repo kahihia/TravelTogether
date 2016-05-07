@@ -4,12 +4,12 @@ angular.module('messages.services', [])
       var Message = Parse.Object.extend('Message');
       var myProfile;
       UserService.currentUser().then(function(_user) {
-        AppService.getProfile(_user).then(function(profile) {
+        AppService.getOrCreateProfile(_user.id, _user.get('Email')).then(function(profile) {
           myProfile = profile;
         });
       });
       return {
-        getLastConversations: function(){
+        getLastConversations: function() {
           var defered = $q.defer();
           var query = new Parse.Query(Message);
           defered.resolve({

@@ -27,7 +27,7 @@ angular.module('messages.controllers', [])
       $scope.$on("$ionicView.enter", function(event, data) {
         UserService.currentUser().then(function(_user) {
           $scope.user = _user;
-          AppService.getProfile(_user).then(function(profile) {
+          AppService.getOrCreateProfile(_user.id, _user.get('Email')).then(function(profile) {
             $scope.fromProfile = profile;
             getMessages = $interval(function() {
               MessagesService.getMessages($stateParams.profileId).then(function(messageList) {
