@@ -1,46 +1,46 @@
-<ion-view title="Details">
+<ion-view title="Моя профил">
   <ion-content class="padding">
     <a class="item item-thumbnail-center" href="{{profileParams.avatar}}">
       <img src="{{profileParams.avatar}}">
       <p>{{user.get('username')}}</p>
       <a class="item item-icon-left" ng-click="getPicture(1)">
-        <i class="icon ion-android-camera"></i> Таке Picture
+        <i class="icon ion-android-camera"></i> Направи снимка
       </a>
       <a class="item item-icon-left" ng-click="getPicture(0)">
-        <i class="icon ion-images"></i> Open Gallery
+        <i class="icon ion-images"></i> Избери от галерия
       </a>
     </a>
 
     <label class="item item-input">
-        <span class="input-label">First Name</span>
+        <span class="input-label">Име</span>
         <input type="text" placeholder="First Name"  ng-model="profileParams.first_name">
     </label>
     <label class="item item-input">
-        <span class="input-label">Last Name</span>
+        <span class="input-label">Фамилия</span>
         <input type="text" placeholder="Last Name" ng-model="profileParams.last_name">
     </label>
     <label class="item item-input item-select">
       <div class="input-label">
-        Gender
+        Пол
       </div>
       <select ng-model="profileParams.gender">
-        <option>male</option>
-        <option>female</option>
+        <option>мъж</option>
+        <option>жена</option>
       </select>
     </label>
 
     <label class="item item-input">
-      <span class="input-label">Age</span>
+      <span class="input-label">Възраст</span>
       <input type="number" ng-model="profileParams.age">
     </label>
 
     <label class="item item-input">
-      <span class="input-label">City</span>
+      <span class="input-label">Град</span>
       <input type="text" placeholder="City" ng-model="profileParams.city">
     </label>
 
     <label class="item item-input">
-      <span class="input-label">Car</span>
+      <span class="input-label">Марка кола</span>
       <input type="text" placeholder="Car brand" ng-model="profileParams.car">
     </label>
 
