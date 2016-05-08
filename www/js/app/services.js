@@ -1,12 +1,15 @@
 angular.module('app.services', [])
   .service('AppService', ['$q', 'ParseConfiguration', '$ionicPopup',
     function($q, ParseConfiguration, $ionicPopup) {
+      var MyProfile;
+
       function alert(title, content) {
         $ionicPopup.alert({
           title: title,
           content: content
         });
       };
+
       function createFullName(firstName, lastName) {
         var name = "";
         if (firstName) {
@@ -44,7 +47,6 @@ angular.module('app.services', [])
          */
         saveProfile: function(profile, params) {
           var defered = $q.defer();
-
           profile.set('age', params.age);
           profile.set('gender', params.gender);
           profile.set('avatar', params.avatar);
@@ -56,6 +58,7 @@ angular.module('app.services', [])
           profile.save(null, {
             success: function(profile) {
               console.log("Profile: Saved " + JSON.stringify(profile));
+              MyProfile = profile;
               defered.resolve(profile);
             },
             error: function(profile, error) {
@@ -66,6 +69,12 @@ angular.module('app.services', [])
         },
         getOrCreateProfile: function(_userId, _userEmail) {
           var defered = $q.defer();
+          console.log(MyProfile);
+          if (MyProfile) {
+            console.log("cachedProfile");
+            defered.resolve(MyProfile);
+            return defered.promise;
+          }
           var profile = new Parse.Query(Profile);
           profile.equalTo("user_id", _userId);
           profile.find({
@@ -83,6 +92,7 @@ angular.module('app.services', [])
                 newProfile.save(null, {
                   success: function(profile) {
                     console.log("Profile: Saved " + JSON.stringify(profile));
+                    MyProfile = profile;
                     defered.resolve(profile);
                   },
                   error: function(profile, error) {
@@ -91,6 +101,7 @@ angular.module('app.services', [])
                 });
               } else {
                 console.log("Profile: Found: " + JSON.stringify(profiles[0]));
+                MyProfile = profiles[0];
                 defered.resolve(profiles[0])
               }
             },

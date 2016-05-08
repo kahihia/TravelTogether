@@ -1,17 +1,38 @@
 <ion-view title="ITEM DETAIL">
   <ion-content has-header="true" padding="true">
-    <div class="list card">
+    <div class="list">
 
       <div class="item item-avatar">
         <img src={{profile.get('avatar')}}>
         <h2>{{ profile.get('first_name') }} {{ profile.get('last_name') }}</h2>
-        <p>Car: {{ profile.get('car') }}</p>
-        <p>Age: {{ profile.get('age') }}</p>
+        <p>Кола: {{ profile.get('car') }}</p>
+        <p>Възраст: {{ profile.get('age') }}</p>
       </div>
-      <pre>{{details.get('from')}}  -->  {{details.get('to')}}</pre>
-      <pre>Свободни места: {{details.get('seats')}}</pre>
-      <pre>Цена: {{details.get('price')}}</pre>
-
+      <div class="item">
+        <pre>{{details.get('from')}}  -->  {{details.get('to')}}</pre>
+        <pre>Свободни места: {{details.get('seats')}}</pre>
+        <pre>Цена: {{details.get('price')}}</pre>
+        <pre>Животни: {{ details.get('allowsPets') }}</pre>
+        <pre>Цигари: {{ details.get('allowsSmoking') }}</pre>
+      </div>
+      <div class="item item-avatar" ng-repeat="comment in comments" type="item-text-wrap">
+        <img src={{comment.get('profile').get('avatar')}}>
+        <pre>{{ comment.get('profile').get('first_name') }} {{ comment.get('profile').get('last_name') }} </pre>
+        <pre>{{comment.get('createdAt')}}</pre>
+        <pre class="positive">{{comment.get('text')}}</pre>
+      </div>
+      <div class="item">
+        <form>
+          <div class="item-input-inset">
+            <label class="item-input-wrapper">
+              <input type="text" placeholder="Your Comment" ng-model="comment.text">
+            </label>
+            <button ng-click="addComment()" class="button button-small">
+              Comment
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </ion-content>
 </ion-view>

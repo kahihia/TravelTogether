@@ -33,7 +33,16 @@ angular.module('travel.controllers', [])
         $scope.details = details;
         $scope.profile = details.get('profile');
         console.log("Results:" + JSON.stringify(details));
-      })
+      });
+      TravelService.findCommentsForTravel($stateParams.travelId).then(function(comments) {
+        $scope.comments = comments;
+        console.log(JSON.stringify(comments[0]));
+      });
+      $scope.comment = {};
+      $scope.addComment = function() {
+        TravelService.addCommentToTravel($scope.profile, $stateParams.travelId, $scope.comment.text);
+        $scope.comment = {};
+      }
     }
   ])
   .controller('TravelCreateCtrl', [
