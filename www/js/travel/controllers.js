@@ -38,7 +38,7 @@ angular.module('travel.controllers', [])
       var getComments = function() {
         TravelService.findCommentsForTravel($stateParams.travelId).then(function(comments) {
           $scope.comments = comments;
-          console.log(JSON.stringify(comments[0]));
+          console.log(JSON.stringify(comments[comments.length-1]));
         });
       }
       $scope.comment = {};

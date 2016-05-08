@@ -24,6 +24,7 @@ angular.module('travel.services', [])
         findCommentsForTravel: function(_travelID) {
           var defered = $q.defer();
           var query = new Parse.Query(Comment);
+          query.include('profile');
           query.equalTo("travel_id", _travelID);
           query.find({
             success: function(comments) {
