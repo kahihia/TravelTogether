@@ -22,27 +22,39 @@ angular.module('travel.controllers', [])
         $interval.cancel(interval);
       });
       $scope.$on("$ionicView.enter", function(event, data) {
+        getTravels();
         interval = $interval(getTravels, 2000);
       });
     }
   ])
   .controller('TravelDetailCtrl', [
-    '$state', '$scope', '$stateParams', 'AppService', 'TravelService', // <-- controller dependencies
-    function($state, $scope, $stateParams, AppService, TravelService) {
+    '$state', '$scope', '$stateParams', '$interval', 'AppService', 'TravelService', // <-- controller dependencies
+    function($state, $scope, $stateParams, $interval, AppService, TravelService) {
       TravelService.findCurTravelDetails($stateParams.travelId).then(function(details) {
         $scope.details = details;
         $scope.profile = details.get('profile');
         console.log("Results:" + JSON.stringify(details));
       });
-      TravelService.findCommentsForTravel($stateParams.travelId).then(function(comments) {
-        $scope.comments = comments;
-        console.log(JSON.stringify(comments[0]));
-      });
+      var getComments = function() {
+        TravelService.findCommentsForTravel($stateParams.travelId).then(function(comments) {
+          $scope.comments = comments;
+          console.log(JSON.stringify(comments[0]));
+        });
+      }
       $scope.comment = {};
       $scope.addComment = function() {
-        TravelService.addCommentToTravel($scope.profile, $stateParams.travelId, $scope.comment.text);
+        TravelService.addCommentToTravel($scope.profile, $stateParams.travelId, $scope.comment.text)
+          .then(getComments);
         $scope.comment = {};
       }
+      var interval;
+      $scope.$on("$ionicView.afterLeave", function(event, data) {
+        $interval.cancel(interval);
+      });
+      $scope.$on("$ionicView.enter", function(event, data) {
+        getComments();
+        interval = $interval(getComments, 2000);
+      });
     }
   ])
   .controller('TravelCreateCtrl', [
