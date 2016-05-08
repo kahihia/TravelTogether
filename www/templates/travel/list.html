@@ -1,14 +1,14 @@
-<ion-view title="Travel Feed">
+<ion-view title="Пътувания">
   <ion-content>
     <ion-list can-swipe="true">
       <label class="item item-input">
-        <span class="input-label">Starting point</span>
+        <span class="input-label">Начална точка</span>
         <select name="startingPoint" ng-model="params.from">
           <option ng-repeat="city in cities" value="{{city}}">{{city}}</option>
         </select>
       </label>
       <label class="item item-input">
-        <span class="input-label">Destination</span>
+        <span class="input-label">Дестинация</span>
         <select name="destinationPoint" ng-model="params.to">
           <option ng-repeat="city in cities" value="{{city}}">{{city}}</option>
         </select>

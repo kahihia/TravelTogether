@@ -1,34 +1,31 @@
-<ion-view title="Create Travel">
+<ion-view title="Създай пътуване">
   <ion-content padding="true" scroll="false" class="has-header">
     <form>
       <ion-list>
         <label class="item item-input">
-          <span class="input-label">Starting point</span>
+          <span class="input-label">Начална точка</span>
           <select name="startingPoint" ng-model="travel.from">
             <option ng-repeat="city in cities" value="{{city}}">{{city}}</option>
           </select>
         </label>
         <label class="item item-input">
-          <span class="input-label">Destination</span>
+          <span class="input-label">Дестинация</span>
           <select name="destinationPoint" ng-model="travel.to">
             <option ng-repeat="city in cities" value="{{city}}">{{city}}</option>
           </select>
         </label>
         <label class="item item-input">
-          <span class="input-label">Available seats</span>
+          <span class="input-label">Свободни места</span>
           <input type="number" placeholder="Seats" ng-model="travel.seats">
         </label>
-        <ion-toggle ng-model="travel.allowsPets" toggle-class="toggle-calm">Allows pets</ion-toggle>
-        <ion-toggle ng-model="travel.allowsSmoking" toggle-class="toggle-calm">Allows smoking</ion-toggle>
+        <ion-toggle ng-model="travel.allowsPets" toggle-class="toggle-calm">Възможност за животни</ion-toggle>
+        <ion-toggle ng-model="travel.allowsSmoking" toggle-class="toggle-calm">Разрешени цигари</ion-toggle>
         <label class="item item-input">
-          <span class="input-label">Price</span>
-          <input type="number" placeholder="Price" ng-model="travel.price">
+          <span class="input-label">Цена</span>
+          <input type="number" ng-model="travel.price">
         </label>
-
-
-
       </ion-list>
-      <button class="button button-positive button-block" ng-click="createTravel()">Create</button>
+      <button class="button button-positive button-block" ng-click="createTravel()">Създай</button>
     </form>
   </ion-content>
 </ion-view>

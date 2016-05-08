@@ -1,4 +1,4 @@
-<ion-view title="ITEM DETAIL">
+<ion-view title="Детайли за пътуването">
   <ion-content has-header="true" padding="true">
     <div class="list">
 
@@ -15,6 +15,7 @@
         <pre>Животни: {{ details.get('allowsPets') }}</pre>
         <pre>Цигари: {{ details.get('allowsSmoking') }}</pre>
       </div>
+      Коментари:
       <div class="item item-avatar" ng-repeat="comment in comments" type="item-text-wrap">
         <img src={{comment.get('profile').get('avatar')}}>
         <pre>{{ comment.get('profile').get('first_name') }} {{ comment.get('profile').get('last_name') }} </pre>
@@ -25,10 +26,10 @@
         <form>
           <div class="item-input-inset">
             <label class="item-input-wrapper">
-              <input type="text" placeholder="Your Comment" ng-model="comment.text">
+              <input type="text" placeholder="Вашият Коментар" ng-model="comment.text">
             </label>
             <button ng-click="addComment()" class="button button-small">
-              Comment
+              Коментирай
             </button>
           </div>
         </form>
