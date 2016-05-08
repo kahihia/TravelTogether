@@ -28,8 +28,8 @@ angular.module('travel.controllers', [])
     }
   ])
   .controller('TravelDetailCtrl', [
-    '$state', '$scope', '$stateParams', '$interval', 'AppService', 'TravelService', // <-- controller dependencies
-    function($state, $scope, $stateParams, $interval, AppService, TravelService) {
+    '$state', '$scope', '$stateParams', '$interval', 'AppService', 'TravelService', 'UserService', // <-- controller dependencies
+    function($state, $scope, $stateParams, $interval, AppService, TravelService, UserService) {
       TravelService.findCurTravelDetails($stateParams.travelId).then(function(details) {
         $scope.details = details;
         $scope.profile = details.get('profile');
@@ -43,10 +43,18 @@ angular.module('travel.controllers', [])
       }
       $scope.comment = {};
       $scope.addComment = function() {
-        TravelService.addCommentToTravel($scope.profile, $stateParams.travelId, $scope.comment.text)
+        UserService.currentUser()
+          .then(function(_user) {
+            $scope.user = _user;
+            return AppService.getOrCreateProfile(_user.id, _user.get('Email'));
+          })
+          .then(function(profile) {
+            text = $scope.comment.text;
+            $scope.comment = {};
+            return TravelService.addCommentToTravel(profile, $stateParams.travelId, text);
+          })
           .then(getComments);
-        $scope.comment = {};
-      }
+      };
       var interval;
       $scope.$on("$ionicView.afterLeave", function(event, data) {
         $interval.cancel(interval);
