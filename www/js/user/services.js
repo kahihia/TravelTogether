@@ -36,7 +36,7 @@ angular.module('user.services', [])
           user.set("email", _userParams.email);
           var result = user.signUp(null, {
             success: function(user) {
-              AppService.getOrCreateProfile(user.id, user.get('Email'));
+              AppService.getOrCreateProfile(user.id, user.get('email'));
             }
           });
           return result;
