@@ -69,12 +69,12 @@ angular.module('app.services', [])
         },
         getOrCreateProfile: function(_userId, _userEmail) {
           var defered = $q.defer();
-          console.log(MyProfile);
-          if (MyProfile) {
-            console.log("cachedProfile");
-            defered.resolve(MyProfile);
-            return defered.promise;
-          }
+          // console.log(MyProfile);
+          // if (MyProfile) {
+          //   console.log("cachedProfile");
+          //   defered.resolve(MyProfile);
+          //   return defered.promise;
+          // }
           var profile = new Parse.Query(Profile);
           profile.equalTo("user_id", _userId);
           profile.find({

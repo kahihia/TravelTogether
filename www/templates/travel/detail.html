@@ -12,8 +12,27 @@
         <pre>{{details.get('from')}}  -->  {{details.get('to')}}</pre>
         <pre>Свободни места: {{details.get('seats')}}</pre>
         <pre>Цена: {{details.get('price')}}</pre>
-        <pre>Животни: {{ details.get('allowsPets') }}</pre>
-        <pre>Цигари: {{ details.get('allowsSmoking') }}</pre>
+
+        <!-- Allows pets -->
+        <!-- If true:-->
+        <div ng-if="details.get('allowsPets')">
+          <i class="icon ion-ios-paw"></i> Взимам животни
+        </div>
+        <!-- If false:-->
+        <div ng-if="false == details.get('allowsPets')" >
+          <i class="icon ion-ios-paw"></i> Без животни
+        </div>
+
+        <!-- Allows smoking -->
+        <!-- If true:-->
+        <div ng-if="details.get('allowsSmoking')">
+          <i class="icon ion-flame"></i> Пуши се
+        </div>
+        <!-- If false:-->
+        <div ng-if="false == details.get('allowsPets')" >
+          <i class="icon ion-no-smoking" ></i> Без цигари
+        </div>
+
       </div>
       Коментари:
       <div class="item item-avatar" ng-repeat="comment in comments" type="item-text-wrap">

@@ -33,10 +33,10 @@ angular.module('user.services', [])
           var user = new Parse.User();
           user.set("username", _userParams.email);
           user.set("password", _userParams.password);
-          user.set("email", _userParams.email);
+          user.set("Email", _userParams.email);
           var result = user.signUp(null, {
             success: function(user) {
-              AppService.getOrCreateProfile(user.id, user.get('email'));
+              AppService.getOrCreateProfile(user.id, user.get('Email'));
             }
           });
           return result;
