@@ -1,5 +1,7 @@
 <ion-view title="Пътувания">
   <ion-content>
+      <ion-refresher pulling-text="Опресни" on-refresh="doRefresh()">
+      </ion-refresher>
     <ion-list can-swipe="true">
       <label class="item item-input">
         <span class="input-label">Начална точка</span>

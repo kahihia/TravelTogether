@@ -5,11 +5,17 @@ angular.module('travel.controllers', [])
       $scope.cities = TravelService.cities;
       $scope.params = {};
 
+      $scope.doRefresh = function() {
+        //force get travels
+        getTravels();
+        // Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.refreshComplete');
+      };
+
       function getTravels() {
         if ($scope.params.from && $scope.params.to) {
           TravelService.findTravelBetweenCities($scope.params.from, $scope.params.to).then(function(travels) {
             $scope.travelList = travels;
-            console.log("between cities");
           });
         } else {
           TravelService.findAllTravels().then(function(travels) {
@@ -38,7 +44,7 @@ angular.module('travel.controllers', [])
       var getComments = function() {
         TravelService.findCommentsForTravel($stateParams.travelId).then(function(comments) {
           $scope.comments = comments;
-          console.log(JSON.stringify(comments[comments.length-1]));
+          console.log(JSON.stringify(comments[comments.length - 1]));
         });
       }
       $scope.comment = {};
