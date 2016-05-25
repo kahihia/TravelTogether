@@ -1,7 +1,58 @@
-<ion-view title="ITEM DETAIL">
-    <ion-content has-header="true" padding="true">
-        <ion-item>
-            ITEM DETAIL {{index}}
-        </ion-item>
-    </ion-content>
+<ion-view title="Детайли за пътуването">
+  <ion-content has-header="true" padding="true">
+    <div class="list">
+
+      <div class="item item-avatar">
+        <img src={{profile.get('avatar')}}>
+        <h2>{{ profile.get('first_name') }} {{ profile.get('last_name') }}</h2>
+        <p>Кола: {{ profile.get('car') }}</p>
+        <p>Възраст: {{ profile.get('age') }}</p>
+      </div>
+      <div class="item">
+        <pre>{{details.get('from')}}  -->  {{details.get('to')}}</pre>
+        <pre>Свободни места: {{details.get('seats')}}</pre>
+        <pre>Цена: {{details.get('price')}}</pre>
+
+        <!-- Allows pets -->
+        <!-- If true:-->
+        <div ng-if="details.get('allowsPets')">
+          <i class="icon ion-ios-paw"></i> Взимам животни
+        </div>
+        <!-- If false:-->
+        <div ng-if="false == details.get('allowsPets')" >
+          <i class="icon ion-ios-paw"></i> Без животни
+        </div>
+
+        <!-- Allows smoking -->
+        <!-- If true:-->
+        <div ng-if="details.get('allowsSmoking')">
+          <i class="icon ion-flame"></i> Пуши се
+        </div>
+        <!-- If false:-->
+        <div ng-if="false == details.get('allowsPets')" >
+          <i class="icon ion-no-smoking" ></i> Без цигари
+        </div>
+
+      </div>
+      Коментари:
+      <div class="item item-avatar" ng-repeat="comment in comments" type="item-text-wrap">
+        <img src={{comment.get('profile').get('avatar')}}>
+        <pre>{{ comment.get('profile').get('first_name') }} {{ comment.get('profile').get('last_name') }} </pre>
+        <pre>{{comment.get('createdAt')}}</pre>
+        <pre class="positive">{{comment.get('text')}}</pre>
+      </div>
+      <div class="item">
+        <form>
+          <div class="item-input-inset">
+            <label class="item-input-wrapper">
+              <input type="text" placeholder="Вашият Коментар" ng-model="comment.text">
+            </label>
+            <button ng-click="addComment()" class="button button-small">
+              Коментирай
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>

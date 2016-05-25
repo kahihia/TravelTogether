@@ -1,1 +1,8 @@
-/* Empty. Add your own CSS if you like */
+h2 {
+    color: blue;
+}
+
+img {
+    width:304px;
+    height:228px;
+}

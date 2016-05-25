@@ -6,18 +6,23 @@
 <ion-tabs ng-class="{'tabs-icon-top':true, 'tabs-positive':true, 'tabs-top':isAndroid}">
 
   <!-- Travels Tab -->
-  <ion-tab title="Home" icon="icon ion-home" href="#/travel/list">
+  <ion-tab icon="icon ion-home" href="#/travel/list">
     <ion-nav-view name="travel-list"></ion-nav-view>
   </ion-tab>
 
   <!-- Travel Create Tab -->
-  <ion-tab title="Create Travel" icon="icon ion-edit" href="#/travel/create">
+  <ion-tab icon="icon ion-edit" href="#/travel/create">
     <ion-nav-view name="travel-create"></ion-nav-view>
   </ion-tab>
 
   <!-- Account Tab -->
-  <ion-tab title="Account" icon="icon ion-person" href="#/travel/account">
-    <ion-nav-view name="account-details"></ion-nav-view>
+  <ion-tab icon="icon ion-person" href="#/travel/account">
+    <ion-nav-view name="account-view"></ion-nav-view>
   </ion-tab>
+
+  <!-- Account Tab -->
+  <!--<ion-tab icon="icon ion-search" href="#/travel/search-profile">
+    <ion-nav-view name="search-profile-view"></ion-nav-view>
+  </ion-tab> -->
 
 </ion-tabs>
